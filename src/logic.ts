@@ -16,9 +16,9 @@ export function getCount(game: GameState) {
   return game.count
 }
 
-Rune.initLogic({
-  minPlayers: 1,
-  maxPlayers: 4,
+Rune.initLogic({ //TODO: determine how many min and max players is most fun
+  minPlayers: 3,
+  maxPlayers: 12,
   setup: (): GameState => {
     return { count: 0 }
   },
