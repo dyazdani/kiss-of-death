@@ -2,6 +2,7 @@ import type { RuneClient } from "rune-games-sdk/multiplayer"
 
 export interface GameState {
   allPlayerIds: string[]
+  allComps: object
   playersSpunThisRound: string[]
   currentTurnPlayer: string
   count: number
@@ -26,6 +27,12 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds: string[]): GameState => ({
     allPlayerIds,
+    allComps: Array(12 - allPlayerIds.length)
+      .fill('comp')
+      .map((el, i) => `${el}${i}`)
+      // TODO: perhaps add other properties to comp objects
+      .reduce((acc, curr) => ({...acc, [curr]: {isUsingBomb: false, isDead: false}}), {})
+      ,
     playersSpunThisRound: [],
     currentTurnPlayer: [
       ...allPlayerIds,
@@ -47,6 +54,7 @@ Rune.initLogic({
       if (playerId !== game.currentTurnPlayer)
         throw Rune.invalidAction()
     
+        game.playersSpunThisRound.push(playerId);
     }
   },
   events: {
