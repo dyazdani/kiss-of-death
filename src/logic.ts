@@ -1,8 +1,13 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
+export interface compPlayer {
+  isUsingBomb: boolean
+  isDead: boolean
+}
+
 export interface GameState {
   allPlayerIds: string[]
-  allComps: object
+  allComps: Array<compPlayer>
   playersSpunThisRound: string[]
   currentTurnPlayer: string
   count: number
@@ -27,11 +32,16 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds: string[]): GameState => ({
     allPlayerIds,
-    allComps: Array(12 - allPlayerIds.length)
+    allComps: (Array(12 - allPlayerIds.length)
       .fill('comp')
       .map((el, i) => `${el}${i}`)
       // TODO: perhaps add other properties to comp objects
-      .reduce((acc, curr) => ({...acc, [curr]: {isUsingBomb: false, isDead: false}}), {})
+      .reduce((acc, curr) => ({...acc, [curr]: {isUsingBomb: false, isDead: false}}), {}) as Array<compPlayer>)
+
+
+
+
+
       ,
     playersSpunThisRound: [],
     currentTurnPlayer: [
