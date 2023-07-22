@@ -62,7 +62,6 @@ Rune.initLogic({
       game.count += amount
     },
     spinBottle: ({ game, playerId } ) => {
-      if (game.turnOrder) {
         if (playerId !== game.turnOrder[0]) {
           throw Rune.invalidAction()
         }
@@ -84,8 +83,6 @@ Rune.initLogic({
       
       const slicedTurnOrder = game.turnOrder.slice(1);
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
-
-      }
     }
   },
   events: {
