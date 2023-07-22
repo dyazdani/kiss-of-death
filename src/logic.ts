@@ -1,13 +1,20 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
-export interface compPlayer {
+export interface CompPlayer {
+  isUsingBomb: boolean
+  isDead: boolean
+}
+
+export interface Player {
+  id: string
   isUsingBomb: boolean
   isDead: boolean
 }
 
 export interface GameState {
   allPlayerIds: string[]
-  allComps: Array<compPlayer>
+  allComps: Array<CompPlayer>
+  allPlayers: Array<Player>
   turnOrder: string[]
   count: number
   gameOver: boolean
@@ -36,7 +43,7 @@ Rune.initLogic({
       .fill('comp')
       .map((element, i) => `${element}${i}`)
       // TODO: perhaps add other properties to comp objects
-      .reduce((acc, curr) => ({...acc, [curr]: {isUsingBomb: false, isDead: false}}), {}) as Array<compPlayer>),
+      .reduce((acc, curr) => ({...acc, [curr]: {isUsingBomb: false, isDead: false}}), {}) as Array<CompPlayer>),
     turnOrder: [
       ...allPlayerIds,
       ...Array(12 - allPlayerIds.length)
@@ -46,6 +53,7 @@ Rune.initLogic({
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value),
+    allPlayers: allPlayerIds.map(element => ({id: element, isUsingBomb: false, isDead: false})),
     count: 0,
     gameOver: false,
   }),
@@ -60,7 +68,7 @@ Rune.initLogic({
         }
         
   
-        // players all have objects that say if they are dead or using bomb
+        // players all have objects that say if they are dead or using bomb √
         // take turn
         //everyone decide if they are using a bomb (comps random 50/50)
         //once everyone decides (there should eventually be a timer), the bottle spins
