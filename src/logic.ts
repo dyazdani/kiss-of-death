@@ -14,6 +14,7 @@ export interface GameState {
   allPlayers: PlayerObject
   allPlayersAndComps: PlayerObject
   turnOrder: string[]
+  kissee: string
   count: number
   gameOver: boolean
 }
@@ -79,6 +80,7 @@ Rune.initLogic({
           isUsingBomb: false, 
           isDead: false}
       }), {} as PlayerObject),
+    kissee: "",
     count: 0,
     gameOver: false,
   }),
