@@ -93,6 +93,16 @@ Rune.initLogic({
           throw Rune.invalidAction()
         }
 
+        const players = game.allPlayersAndComps;
+        const playersKeys = Object.keys(players);
+        const randomPlayersArray = playersKeys[Math.floor(Math.random() * playersKeys.length)];
+        for (let i = 0; i < randomPlayersArray.length; i++) {
+          if (!players[randomPlayersArray[i] as keyof PlayerObject].isDead) {
+            game.kissee = randomPlayersArray[i];
+            break;
+          }
+        }
+
 
         
   
