@@ -53,6 +53,7 @@ Rune.initLogic({
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value),
+    // An array of player objects
     allPlayers: allPlayerIds.map(element => ({id: element, isUsingBomb: false, isDead: false})),
     count: 0,
     gameOver: false,
