@@ -104,9 +104,11 @@ Rune.initLogic({
         game.allPlayers[playerId as keyof PlayersObject].hasMadeBombDecision = true;
       }
     },
-    // dontUseBomb: ({ game, playerId }) => {
-
-    // },
+    dontUseBomb: ({ game, playerId }) => {
+      if (!game.allPlayers[playerId as keyof PlayersObject].isDead) {
+        game.allPlayers[playerId as keyof PlayersObject].hasMadeBombDecision = true;
+      }
+    },
   },
   events: {
     playerJoined: () => {
