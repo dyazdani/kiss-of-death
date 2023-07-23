@@ -1,15 +1,17 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
-export interface Player {
-  hasMadeBombDecision: boolean
-  isUsingBomb: boolean
-  isDead: boolean
+export interface PlayersObject {
+  Player: { 
+    hasMadeBombDecision: boolean
+    isUsingBomb: boolean
+    isDead: boolean
+  }
 }
 
 export interface GameState {
   allPlayerIds: string[]
-  allComps: Player
-  allPlayers: Player
+  allComps: PlayersObject
+  allPlayers: PlayersObject
   turnOrder: string[]
   count: number
   gameOver: boolean
@@ -18,6 +20,8 @@ export interface GameState {
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (params: {game: GameState, playerId: string}) => void
+  useBomb: (params: {game: GameState, playerId: string}) => void
+  dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
 
 declare global {
@@ -44,7 +48,7 @@ Rune.initLogic({
           isUsingBomb: false, 
           isDead: false
         }
-      }), {}) as Player),
+      }), {} as PlayersObject)),
     turnOrder: [
       ...allPlayerIds,
       ...Array(12 - allPlayerIds.length)
@@ -61,7 +65,7 @@ Rune.initLogic({
           hasMadeBombDecision: false, 
           isUsingBomb: false, 
           isDead: false}
-      }), {} as Player),
+      }), {} as PlayersObject),
     count: 0,
     gameOver: false,
   }),
@@ -69,10 +73,12 @@ Rune.initLogic({
     increment: ({ amount}, { game }) => {
       game.count += amount
     },
-    spinBottle: ({ game, playerId } ) => {
+    spinBottle: ( { game, playerId } ) => {
         if (playerId !== game.turnOrder[0]) {
           throw Rune.invalidAction()
         }
+
+
         
   
         // players all have objects that say if they are dead or using bomb √
@@ -91,7 +97,16 @@ Rune.initLogic({
       
       const slicedTurnOrder = game.turnOrder.slice(1);
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
-    }
+    },
+    useBomb: ({ game, playerId }) => {
+      if (!game.allPlayers[playerId as keyof PlayersObject].isDead) {
+        game.allPlayers[playerId as keyof PlayersObject].isUsingBomb = true;
+        game.allPlayers[playerId as keyof PlayersObject].hasMadeBombDecision = true;
+      }
+    },
+    // dontUseBomb: ({ game, playerId }) => {
+
+    // },
   },
   events: {
     playerJoined: () => {
