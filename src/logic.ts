@@ -89,10 +89,12 @@ Rune.initLogic({
       game.count += amount
     },
     spinBottle: ( { game, playerId } ) => {
+        // Cannot spin bottle if not your turn
         if (playerId !== game.turnOrder[0]) {
           throw Rune.invalidAction()
         }
-
+        
+        // Determine random kissee
         const players = game.allPlayersAndComps;
         const playersKeys = Object.keys(players);
         const randomPlayersArray = playersKeys[Math.floor(Math.random() * playersKeys.length)];
