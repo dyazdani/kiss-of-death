@@ -7,7 +7,6 @@ export interface CompPlayer {
 }
 
 export interface Player {
-  id: string
   hasMadeBombDecision: boolean
   isUsingBomb: boolean
   isDead: boolean
@@ -45,7 +44,13 @@ Rune.initLogic({
       .fill('comp')
       .map((element, i) => `${element}${i}`)
       // TODO: perhaps add other properties to comp objects
-      .reduce((acc, curr) => ({...acc, [curr]: {hasMadeBombDecision: false, isUsingBomb: false, isDead: false}}), {}) as Array<CompPlayer>),
+      .reduce((acc, curr) => ({
+        ...acc, [curr]: {
+          hasMadeBombDecision: false, 
+          isUsingBomb: false, 
+          isDead: false
+        }
+      }), {}) as Array<CompPlayer>),
     turnOrder: [
       ...allPlayerIds,
       ...Array(12 - allPlayerIds.length)
@@ -56,7 +61,13 @@ Rune.initLogic({
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value),
     // An array of player objects
-    allPlayers: allPlayerIds.map(element => ({id: element, hasMadeBombDecision: false, isUsingBomb: false, isDead: false})),
+    allPlayers: allPlayerIds
+      .reduce((acc, curr) => ({
+        ...acc, [curr]: {
+          hasMadeBombDecision: false, 
+          isUsingBomb: false, 
+          isDead: false}
+      }), {} as Array<Player>),
     count: 0,
     gameOver: false,
   }),
