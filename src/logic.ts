@@ -112,7 +112,7 @@ Rune.initLogic({
         // take turn
         //everyone decide if they are using a bomb (comps random 50/50)
         //once everyone decides (there should eventually be a timer), the bottle spins
-        //randomly select player from turnOrder list
+        //randomly select player to be kissee √
         // if playerId matches playerId selected for kiss, check if isUsingBomb is true. 
         //if so, kisser isDead: true. If isUsingBomb: false, kissed isDead: true. 
         //If unkissed isUsingBomb: true, then their isDead = true
