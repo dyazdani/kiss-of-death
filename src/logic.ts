@@ -1,6 +1,6 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
-export interface PlayersObject {
+export interface PlayerObject {
   Player: { 
     hasMadeBombDecision: boolean
     isUsingBomb: boolean
@@ -10,8 +10,9 @@ export interface PlayersObject {
 
 export interface GameState {
   allPlayerIds: string[]
-  allComps: PlayersObject
-  allPlayers: PlayersObject
+  allComps: PlayerObject
+  allPlayers: PlayerObject
+  allPlayersAndComps: PlayerObject
   turnOrder: string[]
   count: number
   gameOver: boolean
@@ -48,7 +49,7 @@ Rune.initLogic({
           isUsingBomb: false, 
           isDead: false
         }
-      }), {} as PlayersObject)),
+      }), {} as PlayerObject)),
     turnOrder: [
       ...allPlayerIds,
       ...Array(12 - allPlayerIds.length)
@@ -65,7 +66,19 @@ Rune.initLogic({
           hasMadeBombDecision: false, 
           isUsingBomb: false, 
           isDead: false}
-      }), {} as PlayersObject),
+      }), {} as PlayerObject),
+      allPlayersAndComps: [
+        ...allPlayerIds,
+        ...Array(12 - allPlayerIds.length)
+        .fill('comp')
+        .map((element, i) => `${element}${i}`)
+      ]
+      .reduce((acc, curr) => ({
+        ...acc, [curr]: {
+          hasMadeBombDecision: false, 
+          isUsingBomb: false, 
+          isDead: false}
+      }), {} as PlayerObject),
     count: 0,
     gameOver: false,
   }),
@@ -99,14 +112,14 @@ Rune.initLogic({
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
     },
     useBomb: ({ game, playerId }) => {
-      if (!game.allPlayers[playerId as keyof PlayersObject].isDead) {
-        game.allPlayers[playerId as keyof PlayersObject].isUsingBomb = true;
-        game.allPlayers[playerId as keyof PlayersObject].hasMadeBombDecision = true;
+      if (!game.allPlayers[playerId as keyof PlayerObject].isDead) {
+        game.allPlayers[playerId as keyof PlayerObject].isUsingBomb = true;
+        game.allPlayers[playerId as keyof PlayerObject].hasMadeBombDecision = true;
       }
     },
     dontUseBomb: ({ game, playerId }) => {
-      if (!game.allPlayers[playerId as keyof PlayersObject].isDead) {
-        game.allPlayers[playerId as keyof PlayersObject].hasMadeBombDecision = true;
+      if (!game.allPlayers[playerId as keyof PlayerObject].isDead) {
+        game.allPlayers[playerId as keyof PlayerObject].hasMadeBombDecision = true;
       }
     },
   },
