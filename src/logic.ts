@@ -1,11 +1,5 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
-export interface CompPlayer {
-  hasMadeBombDecision: boolean
-  isUsingBomb: boolean
-  isDead: boolean
-}
-
 export interface Player {
   hasMadeBombDecision: boolean
   isUsingBomb: boolean
@@ -14,8 +8,8 @@ export interface Player {
 
 export interface GameState {
   allPlayerIds: string[]
-  allComps: Array<CompPlayer>
-  allPlayers: Array<Player>
+  allComps: Player
+  allPlayers: Player
   turnOrder: string[]
   count: number
   gameOver: boolean
@@ -39,7 +33,7 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds: string[]): GameState => ({
     allPlayerIds,
-    // array of all computer players AKA bots
+    // object with of all computer players AKA bots as objects
     allComps: (Array(12 - allPlayerIds.length) 
       .fill('comp')
       .map((element, i) => `${element}${i}`)
@@ -50,7 +44,7 @@ Rune.initLogic({
           isUsingBomb: false, 
           isDead: false
         }
-      }), {}) as Array<CompPlayer>),
+      }), {}) as Player),
     turnOrder: [
       ...allPlayerIds,
       ...Array(12 - allPlayerIds.length)
@@ -60,14 +54,14 @@ Rune.initLogic({
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value),
-    // An array of player objects
+    // An object with player objects
     allPlayers: allPlayerIds
       .reduce((acc, curr) => ({
         ...acc, [curr]: {
           hasMadeBombDecision: false, 
           isUsingBomb: false, 
           isDead: false}
-      }), {} as Array<Player>),
+      }), {} as Player),
     count: 0,
     gameOver: false,
   }),
