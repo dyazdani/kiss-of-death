@@ -54,7 +54,7 @@ export function getCount(game: GameState) {
 }
 
 Rune.initLogic({
-  minPlayers: 1,
+  minPlayers: 4,
   maxPlayers: 4,
   setup: (allPlayerIds: string[]): GameState => ({
     allPlayerIds,
