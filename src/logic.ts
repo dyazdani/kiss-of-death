@@ -9,7 +9,7 @@
 // STRETCH: If unkissed isUsingBomb: true, then their isDead = true
 // All player with isDead: true are eliminated.
 // STRETCH: 1. if there are no more people players left game over and no one wins.
-// 2. If there is one person and no more computers left, that person wins!
+// 2. If there is one person left, that person wins! √
 // STRETCH: If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
 // Change turnOrder so the next person is at the front of the queue √
 
