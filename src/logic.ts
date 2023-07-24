@@ -35,6 +35,7 @@ export interface GameState {
   kissee: string
   count: number
   gameOver: boolean
+  playersLeft: number
 }
 
 type GameActions = {
@@ -90,6 +91,7 @@ Rune.initLogic({
     kissee: "",
     count: 0,
     gameOver: false,
+    playersLeft: 4
   }),
   actions: {
     increment: ({ amount}, { game }) => {
@@ -113,6 +115,7 @@ Rune.initLogic({
           game.kissee = randomPlayerOrComp[i];
           // Mark them as dead
           game.allPlayersAndComps.allPlayers[randomPlayerOrComp[i] as keyof PlayerObject].isDead = true;
+          game.playersLeft--;
           break;
         }
       }
@@ -127,15 +130,20 @@ Rune.initLogic({
       }
 
       // Check to see if any player is a winner
-      // if (game.allPlayersAndComps)
+      if (game.playersLeft === 1) {
+        const losers = game.allPlayerIds.filter(id => game.allPlayersAndComps.allPlayers[id as keyof PlayerObject].isDead);
+        const winner = game.allPlayerIds.filter(id => !game.allPlayersAndComps.allPlayers[id as keyof PlayerObject].isDead)[0];
+        Rune.gameOver({
+          players: {
+            [winner]: "WON",
+            [losers[0]]: "LOST",
+            [losers[1]]: "LOST",
+            [losers[3]]: "LOST",
+          }
+        })
+      }
 
-      // Rune.gameOver({
-      //   players: {
-      //     [winner]: "WON",
-      //     [loser]: "LOST",
-      //   },
-      //   delayPopUp: true,
-      // })
+      
 
       // Use turnOrder array to establish next player's turn
       const slicedTurnOrder = game.turnOrder.slice(1);
