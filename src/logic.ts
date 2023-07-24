@@ -135,12 +135,27 @@ Rune.initLogic({
       // })
 
       // Use turnOrder array to establish next player's turn
-      let slicedTurnOrder = game.turnOrder.slice(1);
-      game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
-      while (game.allPlayersAndComps[game.turnOrder[0] as keyof PlayerObject].isDead) {
-        slicedTurnOrder = game.turnOrder.slice(1);
-        game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
+      const slicedTurnOrder = game.turnOrder.slice(1);
+      game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
+
+      // If the player with the next turn is in the allPlayers object
+      if (game.allPlayersAndComps.allPlayers[game.turnOrder[0] as keyof PlayerObject]) {
+        // And if that player is dead...
+        if (game.allPlayersAndComps.allPlayers[game.turnOrder[0] as keyof PlayerObject].isDead) {
+          // Remove them from the turOrder array
+          game.turnOrder = game.turnOrder.slice(1);
+        }
       }
+
+      // If the player with the next turn is in the allComps object
+      if (game.allPlayersAndComps.allComps[game.turnOrder[0] as keyof PlayerObject]) {
+        // And if that player is dead...
+        if (game.allPlayersAndComps.allComps[game.turnOrder[0] as keyof PlayerObject].isDead) {
+          // Remove them from the turOrder array
+          game.turnOrder = game.turnOrder.slice(1);
+        }
+      }
+     
     },
 
     // STRETCH GOAL
