@@ -109,7 +109,7 @@ Rune.initLogic({
       const allKeys = [...Object.keys(players), ...Object.keys(comps)]
       const randomPlayerOrComp = allKeys[Math.floor(Math.random() * allKeys.length)];
 
-      // find kissee in players list
+      // find kissee in players object
       for (let i = 0; i < randomPlayerOrComp.length; i++) {
         if (!players[randomPlayerOrComp[i] as keyof PlayerObject].isDead) {
           game.kissee = randomPlayerOrComp[i];
@@ -119,7 +119,7 @@ Rune.initLogic({
           break;
         }
       }
-      // if not a player, find kissee in comps list
+      // if not a player, find kissee in comps object
       for (let i = 0; i < randomPlayerOrComp.length; i++) {
         if (!comps[randomPlayerOrComp[i] as keyof PlayerObject].isDead) {
           game.kissee = randomPlayerOrComp[i];
