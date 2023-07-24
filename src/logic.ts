@@ -106,10 +106,12 @@ Rune.initLogic({
       const comps = game.allPlayersAndComps.allComps;
       const allKeys = [...Object.keys(players), ...Object.keys(comps)]
       const randomPlayerOrComp = allKeys[Math.floor(Math.random() * allKeys.length)];
+
       // find kissee in players list
       for (let i = 0; i < randomPlayerOrComp.length; i++) {
         if (!players[randomPlayerOrComp[i] as keyof PlayerObject].isDead) {
           game.kissee = randomPlayerOrComp[i];
+          // Mark them as dead
           game.allPlayersAndComps.allPlayers[randomPlayerOrComp[i] as keyof PlayerObject].isDead = true;
           break;
         }
@@ -118,6 +120,7 @@ Rune.initLogic({
       for (let i = 0; i < randomPlayerOrComp.length; i++) {
         if (!comps[randomPlayerOrComp[i] as keyof PlayerObject].isDead) {
           game.kissee = randomPlayerOrComp[i];
+          // Mark them as dead
           game.allPlayersAndComps.allComps[randomPlayerOrComp[i] as keyof PlayerObject].isDead = true;
           break;
         }
