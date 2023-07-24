@@ -1,3 +1,18 @@
+// players all have objects that say if they are dead or using bomb √
+// take turn
+// STRETCH: everyone decide if they are using a bomb (comps random 50/50)
+// STRETCH: once everyone decides (there should eventually be a timer), the bottle spins
+//randomly select player to be kissee √
+// STRETCH: if playerId matches playerId selected for kiss, check if isUsingBomb is true. 
+// STRETCH: if so, kisser isDead: true. If isUsingBomb: false, 
+// kissed isDead: true. √
+// STRETCH: If unkissed isUsingBomb: true, then their isDead = true
+// All player with isDead: true are eliminated.
+// 1. if there are no more people players left game over and no one wins.
+// 2. If there is one person and no more computers left, that person wins!
+// STRETCH: If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
+// Change turnOrder so the next person is at the front of the queue √
+
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
 export interface PlayerObject {
@@ -89,41 +104,24 @@ Rune.initLogic({
       game.count += amount
     },
     spinBottle: ( { game, playerId } ) => {
-        // Cannot spin bottle if not your turn or dead
-        if (playerId !== game.turnOrder[0] || game.allPlayersAndComps[playerId as keyof PlayerObject].isDead) {
-          throw Rune.invalidAction()
-        }
-        
-        // Determine random kissee
-        const players = game.allPlayersAndComps;
-        const playersKeys = Object.keys(players);
-        const randomPlayersArray = playersKeys[Math.floor(Math.random() * playersKeys.length)];
-        for (let i = 0; i < randomPlayersArray.length; i++) {
-          if (!players[randomPlayersArray[i] as keyof PlayerObject].isDead) {
-            game.kissee = randomPlayersArray[i];
-            game.allPlayersAndComps[randomPlayersArray[i] as keyof PlayerObject].isDead = true;
-            break;
-          }
-        }
-
-
-        
-  
-        // players all have objects that say if they are dead or using bomb √
-        // take turn
-        // STRETCH: everyone decide if they are using a bomb (comps random 50/50)
-        // STRETCH: once everyone decides (there should eventually be a timer), the bottle spins
-        //randomly select player to be kissee √
-        // STRETCH: if playerId matches playerId selected for kiss, check if isUsingBomb is true. 
-        // STRETCH: if so, kisser isDead: true. If isUsingBomb: false, 
-        // kissed isDead: true. √
-        // STRETCH: If unkissed isUsingBomb: true, then their isDead = true
-        // All player with isDead: true are eliminated.
-        // 1. if there are no more people players left game over and no one wins.
-        // 2. If there is one person and no more computers left, that person wins!
-        // STRETCH: If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
-        // Change turnOrder so the next person is at the front of the queue √
+      // Cannot spin bottle if not your turn or dead
+      if (playerId !== game.turnOrder[0] || game.allPlayersAndComps[playerId as keyof PlayerObject].isDead) {
+        throw Rune.invalidAction()
+      }
       
+      // Determine random kissee
+      const players = game.allPlayersAndComps;
+      const playersKeys = Object.keys(players);
+      const randomPlayersArray = playersKeys[Math.floor(Math.random() * playersKeys.length)];
+      for (let i = 0; i < randomPlayersArray.length; i++) {
+        if (!players[randomPlayersArray[i] as keyof PlayerObject].isDead) {
+          game.kissee = randomPlayersArray[i];
+          game.allPlayersAndComps[randomPlayersArray[i] as keyof PlayerObject].isDead = true;
+          break;
+        }
+      }
+
+
       let slicedTurnOrder = game.turnOrder.slice(1);
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
       while (game.allPlayersAndComps[game.turnOrder[0] as keyof PlayerObject].isDead) {
