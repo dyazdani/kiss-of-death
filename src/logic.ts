@@ -124,8 +124,12 @@ Rune.initLogic({
         // STRETCH: If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
         // Change turnOrder so the next person is at the front of the queue √
       
-      const slicedTurnOrder = game.turnOrder.slice(1);
+      let slicedTurnOrder = game.turnOrder.slice(1);
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
+      while (game.allPlayersAndComps[game.turnOrder[0] as keyof PlayerObject].isDead) {
+        slicedTurnOrder = game.turnOrder.slice(1);
+        game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
+      }
     },
     useBomb: ({ game, playerId }) => {
       if (!game.allPlayers[playerId as keyof PlayerObject].isDead) {
