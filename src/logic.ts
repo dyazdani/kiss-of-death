@@ -8,7 +8,7 @@
 // kissed isDead: true. √
 // STRETCH: If unkissed isUsingBomb: true, then their isDead = true
 // All player with isDead: true are eliminated.
-// 1. if there are no more people players left game over and no one wins.
+// STRETCH: 1. if there are no more people players left game over and no one wins.
 // 2. If there is one person and no more computers left, that person wins!
 // STRETCH: If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
 // Change turnOrder so the next person is at the front of the queue √
@@ -23,11 +23,14 @@ export interface PlayerObject {
   }
 }
 
+export interface PlayersAndCompsObject {
+  allPlayers: PlayerObject
+  allComps: PlayerObject
+}
+
 export interface GameState {
   allPlayerIds: string[]
-  allComps: PlayerObject
-  allPlayers: PlayerObject
-  allPlayersAndComps: PlayerObject
+  allPlayersAndComps: PlayersAndCompsObject
   turnOrder: string[]
   kissee: string
   count: number
@@ -37,8 +40,8 @@ export interface GameState {
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (params: {game: GameState, playerId: string}) => void
-  useBomb: (params: {game: GameState, playerId: string}) => void
-  dontUseBomb: (params: {game: GameState, playerId: string}) => void
+  // useBomb: (params: {game: GameState, playerId: string}) => void
+  // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
 
 declare global {
@@ -54,18 +57,6 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds: string[]): GameState => ({
     allPlayerIds,
-    // object with of all computer players AKA bots as objects
-    allComps: (Array(12 - allPlayerIds.length) 
-      .fill('comp')
-      .map((element, i) => `${element}${i}`)
-      // TODO: perhaps add other properties to comp objects
-      .reduce((acc, curr) => ({
-        ...acc, [curr]: {
-          hasMadeBombDecision: false, 
-          isUsingBomb: false, 
-          isDead: false
-        }
-      }), {} as PlayerObject)),
     turnOrder: [
       ...allPlayerIds,
       ...Array(12 - allPlayerIds.length)
@@ -75,26 +66,27 @@ Rune.initLogic({
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value),
-    // An object with player objects
-    allPlayers: allPlayerIds
-      .reduce((acc, curr) => ({
-        ...acc, [curr]: {
-          hasMadeBombDecision: false, 
-          isUsingBomb: false, 
-          isDead: false}
-      }), {} as PlayerObject),
-      allPlayersAndComps: [
-        ...allPlayerIds,
-        ...Array(12 - allPlayerIds.length)
-        .fill('comp')
-        .map((element, i) => `${element}${i}`)
-      ]
-      .reduce((acc, curr) => ({
-        ...acc, [curr]: {
-          hasMadeBombDecision: false, 
-          isUsingBomb: false, 
-          isDead: false}
-      }), {} as PlayerObject),
+      allPlayersAndComps: {
+        // An object with player objects
+        allPlayers: allPlayerIds
+          .reduce((acc, curr) => ({
+          ...acc, [curr]: {
+            hasMadeBombDecision: false, 
+            isUsingBomb: false, 
+            isDead: false}
+          }), {} as PlayerObject),
+        // object with of all computer players AKA bots as objects
+        allComps: (Array(12 - allPlayerIds.length) 
+          .fill('comp')
+          .map((element, i) => `${element}${i}`)
+          .reduce((acc, curr) => ({
+            ...acc, [curr]: {
+              hasMadeBombDecision: false, 
+              isUsingBomb: false, 
+              isDead: false
+            }
+          }), {} as PlayerObject))
+      },
     kissee: "",
     count: 0,
     gameOver: false,
@@ -105,23 +97,44 @@ Rune.initLogic({
     },
     spinBottle: ( { game, playerId } ) => {
       // Cannot spin bottle if not your turn or dead
-      if (playerId !== game.turnOrder[0] || game.allPlayersAndComps[playerId as keyof PlayerObject].isDead) {
+      if (playerId !== game.turnOrder[0] || game.allPlayersAndComps.allPlayers[playerId as keyof PlayerObject].isDead) {
         throw Rune.invalidAction()
       }
       
       // Determine random kissee
-      const players = game.allPlayersAndComps;
-      const playersKeys = Object.keys(players);
-      const randomPlayersArray = playersKeys[Math.floor(Math.random() * playersKeys.length)];
-      for (let i = 0; i < randomPlayersArray.length; i++) {
-        if (!players[randomPlayersArray[i] as keyof PlayerObject].isDead) {
-          game.kissee = randomPlayersArray[i];
-          game.allPlayersAndComps[randomPlayersArray[i] as keyof PlayerObject].isDead = true;
+      const players = game.allPlayersAndComps.allPlayers;
+      const comps = game.allPlayersAndComps.allComps;
+      const allKeys = [...Object.keys(players), ...Object.keys(comps)]
+      const randomPlayerOrComp = allKeys[Math.floor(Math.random() * allKeys.length)];
+      // find kissee in players list
+      for (let i = 0; i < randomPlayerOrComp.length; i++) {
+        if (!players[randomPlayerOrComp[i] as keyof PlayerObject].isDead) {
+          game.kissee = randomPlayerOrComp[i];
+          game.allPlayersAndComps.allPlayers[randomPlayerOrComp[i] as keyof PlayerObject].isDead = true;
+          break;
+        }
+      }
+      // if not a player, find kissee in comps list
+      for (let i = 0; i < randomPlayerOrComp.length; i++) {
+        if (!comps[randomPlayerOrComp[i] as keyof PlayerObject].isDead) {
+          game.kissee = randomPlayerOrComp[i];
+          game.allPlayersAndComps.allComps[randomPlayerOrComp[i] as keyof PlayerObject].isDead = true;
           break;
         }
       }
 
+      // Check to see if any player is a winner
+      // if (game.allPlayersAndComps)
 
+      // Rune.gameOver({
+      //   players: {
+      //     [winner]: "WON",
+      //     [loser]: "LOST",
+      //   },
+      //   delayPopUp: true,
+      // })
+
+      // Use turnOrder array to establish next player's turn
       let slicedTurnOrder = game.turnOrder.slice(1);
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
       while (game.allPlayersAndComps[game.turnOrder[0] as keyof PlayerObject].isDead) {
@@ -129,17 +142,19 @@ Rune.initLogic({
         game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]]
       }
     },
-    useBomb: ({ game, playerId }) => {
-      if (!game.allPlayers[playerId as keyof PlayerObject].isDead) {
-        game.allPlayers[playerId as keyof PlayerObject].isUsingBomb = true;
-        game.allPlayers[playerId as keyof PlayerObject].hasMadeBombDecision = true;
-      }
-    },
-    dontUseBomb: ({ game, playerId }) => {
-      if (!game.allPlayers[playerId as keyof PlayerObject].isDead) {
-        game.allPlayers[playerId as keyof PlayerObject].hasMadeBombDecision = true;
-      }
-    },
+
+    // STRETCH GOAL
+    // useBomb: ({ game, playerId }) => {
+    //   if (!game.allPlayers[playerId as keyof PlayerObject].isDead) {
+    //     game.allPlayers[playerId as keyof PlayerObject].isUsingBomb = true;
+    //     game.allPlayers[playerId as keyof PlayerObject].hasMadeBombDecision = true;
+    //   }
+    // },
+    // dontUseBomb: ({ game, playerId }) => {
+    //   if (!game.allPlayers[playerId as keyof PlayerObject].isDead) {
+    //     game.allPlayers[playerId as keyof PlayerObject].hasMadeBombDecision = true;
+    //   }
+    // },
   },
   events: {
     playerJoined: () => {
