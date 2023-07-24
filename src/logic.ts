@@ -89,8 +89,8 @@ Rune.initLogic({
       game.count += amount
     },
     spinBottle: ( { game, playerId } ) => {
-        // Cannot spin bottle if not your turn
-        if (playerId !== game.turnOrder[0]) {
+        // Cannot spin bottle if not your turn or dead
+        if (playerId !== game.turnOrder[0] || game.allPlayersAndComps[playerId as keyof PlayerObject].isDead) {
           throw Rune.invalidAction()
         }
         
@@ -101,6 +101,7 @@ Rune.initLogic({
         for (let i = 0; i < randomPlayersArray.length; i++) {
           if (!players[randomPlayersArray[i] as keyof PlayerObject].isDead) {
             game.kissee = randomPlayersArray[i];
+            game.allPlayersAndComps[randomPlayersArray[i] as keyof PlayerObject].isDead = true;
             break;
           }
         }
@@ -110,16 +111,17 @@ Rune.initLogic({
   
         // players all have objects that say if they are dead or using bomb √
         // take turn
-        //everyone decide if they are using a bomb (comps random 50/50)
-        //once everyone decides (there should eventually be a timer), the bottle spins
+        // STRETCH: everyone decide if they are using a bomb (comps random 50/50)
+        // STRETCH: once everyone decides (there should eventually be a timer), the bottle spins
         //randomly select player to be kissee √
-        // if playerId matches playerId selected for kiss, check if isUsingBomb is true. 
-        //if so, kisser isDead: true. If isUsingBomb: false, kissed isDead: true. 
-        //If unkissed isUsingBomb: true, then their isDead = true
+        // STRETCH: if playerId matches playerId selected for kiss, check if isUsingBomb is true. 
+        // STRETCH: if so, kisser isDead: true. If isUsingBomb: false, 
+        // kissed isDead: true. √
+        // STRETCH: If unkissed isUsingBomb: true, then their isDead = true
         // All player with isDead: true are eliminated.
         // 1. if there are no more people players left game over and no one wins.
         // 2. If there is one person and no more computers left, that person wins!
-        // If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
+        // STRETCH: If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
         // Change turnOrder so the next person is at the front of the queue √
       
       const slicedTurnOrder = game.turnOrder.slice(1);
