@@ -97,7 +97,7 @@ Rune.initLogic({
     increment: ({ amount}, { game }) => {
       game.count += amount
     },
-    spinBottle: ( { game, playerId } ) => {
+    spinBottle: ( {game, playerId } ) => {
       // Cannot spin bottle if not your turn or dead
       if (playerId !== game.turnOrder[0] || game.allPlayersAndComps.allPlayers[playerId as keyof PlayerObject].isDead) {
         throw Rune.invalidAction()

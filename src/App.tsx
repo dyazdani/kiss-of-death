@@ -5,11 +5,16 @@ import PlayerCircle from "./components/PlayerCircle.tsx"
 
 function App() {
   const [game, setGame] = useState<GameState>()
+  const [playerWhoSpun, setPlayerWhoSpun] = useState('')
+
   useEffect(() => {
     Rune.initClient({
-      onChange: ({ newGame }) => {
+      onChange: ({ newGame, action }) => {
         setGame(newGame)
-      },
+        if (action) {
+          setPlayerWhoSpun(action.playerId)
+        }
+      }
     })
   }, [])
 
@@ -21,6 +26,7 @@ function App() {
     <>
       <h1>Kiss of Death</h1>
       <PlayerCircle allPlayerIds={game.allPlayerIds}/>
+      <button type="button" onClick={() => {Rune.actions.spinBottle({game: game, playerId: playerWhoSpun})}}>Spin the Bottle</button>
     </>
   )
 }
