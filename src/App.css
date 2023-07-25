@@ -5,25 +5,72 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.circle-wrapper {
+  width:301px;
+  height:301px;
+  border-radius:51%;
+  background:Chartreuse;
+  position:relative;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.circle {
+  display:block;
+  position:absolute;
+  top:51%;
+  left:51%;
+  width:50px;
+  height:50px;
+  margin:-25.5px;
+  background:red;
+  border-radius:51%;
+  text-align:center;
+  line-height:50px;
 }
 
-.logo.rune:hover {
-  filter: drop-shadow(0 0 2em #a72cebaa);
+.deg-0 {
+  transform:translate(151px)
 }
 
-.card {
-  padding: 2em;
+.deg-30 {
+  transform:rotate(31deg) translate(151px) rotate(-31deg);
 }
 
-.read-the-docs {
-  color: #888;
+.deg-60 {
+  transform:rotate(61deg) translate(151px) rotate(-61deg);
+}
+
+.deg-90 {
+  transform:rotate(91deg) translate(151px) rotate(-91deg);
+}
+
+.deg-120 {
+  transform:rotate(121deg) translate(151px) rotate(-121deg);
+}
+
+.deg-150 {
+  transform:rotate(151deg) translate(151px) rotate(-151deg);
+}
+
+.deg-180 {
+  transform:rotate(181deg) translate(151px) rotate(-181deg);
+}
+
+.deg-210 {
+  transform:rotate(211deg) translate(151px) rotate(-211deg);
+}
+
+.deg-240 {
+  transform:rotate(241deg) translate(151px) rotate(-241deg);
+}
+
+.deg-270 {
+  transform:rotate(271deg) translate(151px) rotate(-271deg);
+}
+
+.deg-300 {
+  transform:rotate(301deg) translate(151px) rotate(-301deg);
+}
+
+.deg-330 {
+  transform:rotate(331deg) translate(151px) rotate(-331deg);
 }

@@ -9,18 +9,18 @@ interface PlayerCircleProps {
 const PlayerCircle = ({allPlayerIds}: PlayerCircleProps) => {
     return (
         <div className="circle-wrapper"> 
-            <Player playerId={allPlayerIds[0]} circleDeg="deg-0" playerName="Player 1" />
-            <Player playerId="comp1" circleDeg="deg-30" playerName="Comp 1" />
-            <Player playerId="comp2" circleDeg="deg-60" playerName="Comp 2" />
-            <Player playerId={allPlayerIds[1]} circleDeg="deg-90" playerName="Player 2" />
-            <Player playerId="comp3" circleDeg="deg-120" playerName="Comp 3" />
-            <Player playerId="comp4" circleDeg="deg-150" playerName="Comp 4" />
-            <Player playerId={allPlayerIds[2]} circleDeg="deg-180" playerName="Player 3" />
-            <Player playerId="comp5" circleDeg="deg-210" playerName="Comp 5" />
-            <Player playerId="comp6" circleDeg="deg-240" playerName="Comp 6" />
-            <Player playerId={allPlayerIds[3]} circleDeg="deg-270" playerName="Player 4" />
-            <Player playerId="comp7" circleDeg="deg-300" playerName="Comp 7" />
-            <Player playerId="comp8" circleDeg="deg-330" playerName="Comp 8" />
+            <Player playerId={allPlayerIds[0]} circleDeg="deg-0" playerName="P1" />
+            <Player playerId="comp1" circleDeg="deg-30" playerName="C1" />
+            <Player playerId="comp2" circleDeg="deg-60" playerName="C2" />
+            <Player playerId={allPlayerIds[1]} circleDeg="deg-90" playerName="P2" />
+            <Player playerId="comp3" circleDeg="deg-120" playerName="C3" />
+            <Player playerId="comp4" circleDeg="deg-150" playerName="C4" />
+            <Player playerId={allPlayerIds[2]} circleDeg="deg-180" playerName="P3" />
+            <Player playerId="comp5" circleDeg="deg-210" playerName="C5" />
+            <Player playerId="comp6" circleDeg="deg-240" playerName="C6" />
+            <Player playerId={allPlayerIds[3]} circleDeg="deg-270" playerName="P4" />
+            <Player playerId="comp7" circleDeg="deg-300" playerName="C7" />
+            <Player playerId="comp8" circleDeg="deg-330" playerName="C8" />
 
         </div>
 
