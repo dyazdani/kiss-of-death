@@ -19,6 +19,7 @@ function App() {
 
   return (
     <>
+      <h1>Kiss of Death</h1>
       <PlayerCircle allPlayerIds={game.allPlayerIds}/>
     </>
   )
