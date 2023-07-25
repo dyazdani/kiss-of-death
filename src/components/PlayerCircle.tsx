@@ -1,21 +1,26 @@
+import Player from "./Player";
+
+interface PlayerCircleProps {
+    allPlayerIds: string[]
+}
 
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
 
-const PlayerCircle = () => {
+const PlayerCircle = ({allPlayerIds}: PlayerCircleProps) => {
     return (
         <div className="circle-wrapper"> 
-            <Player playerId={playerId1} className="circle deg-0">Player 1</Player>
-            <Player playerId="comp1" className="circle deg-30">Comp 1</Player>
-            <Player playerId="comp2" className="circle deg-60">Comp 2</Player>
-            <Player playerId={playerId2} className="circle deg-90">Player 2</Player>
-            <Player playerId="comp3" className="circle deg-120">Comp 3</Player>
-            <Player playerId="comp4" className="circle deg-150">Comp 4</Player>
-            <Player playerId={playerId3} className="circle deg-180">Player 3</Player>
-            <Player playerId="comp5" className="circle deg-210">Comp 5</Player>
-            <Player playerId="comp6" className="circle deg-240">Comp 6</Player>
-            <Player playerId={playerId4} className="circle deg-270">Player 4</Player>
-            <Player playerId="comp7" className="circle deg-300">Comp 7</Player>
-            <Player playerId="comp8" className="circle deg-330">Comp 8</Player>
+            <Player playerId={allPlayerIds[0]} circleDeg="deg-0" playerName="Player 1" />
+            <Player playerId="comp1" circleDeg="deg-30" playerName="Comp 1" />
+            <Player playerId="comp2" circleDeg="deg-60" playerName="Comp 2" />
+            <Player playerId={allPlayerIds[1]} circleDeg="deg-90" playerName="Player 2" />
+            <Player playerId="comp3" circleDeg="deg-120" playerName="Comp 3" />
+            <Player playerId="comp4" circleDeg="deg-150" playerName="Comp 4" />
+            <Player playerId={allPlayerIds[2]} circleDeg="deg-180" playerName="Player 3" />
+            <Player playerId="comp5" circleDeg="deg-210" playerName="Comp 5" />
+            <Player playerId="comp6" circleDeg="deg-240" playerName="Comp 6" />
+            <Player playerId={allPlayerIds[3]} circleDeg="deg-270" playerName="Player 4" />
+            <Player playerId="comp7" circleDeg="deg-300" playerName="Comp 7" />
+            <Player playerId="comp8" circleDeg="deg-330" playerName="Comp 8" />
 
         </div>
 
