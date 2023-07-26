@@ -51,7 +51,7 @@ function App() {
           Rune.actions.spinBottle(myPlayerId)
         }}
         >Spin the Bottle</button>
-      <p>{`It is ${game.turnOrder[0]}'s turn`}</p>
+      <p>{game.playersReady.length < 4 ? "" : `It is ${game.turnOrder[0]}'s turn`}</p>
       <p>{typeof game.kissee === "string" && game.kissee.length > 0 && `The bottle pointed to ${game.kissee}, who was kissed and then died`}</p>
     </>
   )
