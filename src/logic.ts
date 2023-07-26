@@ -43,6 +43,7 @@ type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
   handleReadyButtonClick: (myPlayerId: string) => void
+  compTurns: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -102,30 +103,45 @@ Rune.initLogic({
     },
     spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee
-      const players = game.allPlayersAndComps.allPlayers;
-      const comps = game.allPlayersAndComps.allComps;
-      const allKeys = [...Object.keys(players), ...Object.keys(comps)]
-      const randomPlayerOrComp = allKeys[Math.floor(Math.random() * allKeys.length)];
+      const setKissee = () => {
+        const players = game.allPlayersAndComps.allPlayers;
+        const comps = game.allPlayersAndComps.allComps;
+        const playerOrCompKeys = [...Object.keys(players), ...Object.keys(comps)]
+        let randomPlayerOrComp = playerOrCompKeys[Math.floor(Math.random() * playerOrCompKeys.length)];
 
-      game.kissee = randomPlayerOrComp;
-
+        while (!game.kissee) {
+          if (players[randomPlayerOrComp]) { // If it is a player...
+            if (!players[randomPlayerOrComp].isDead) { //...and they are not dead
+              game.allPlayersAndComps.allPlayers[randomPlayerOrComp].isDead = true;
+              game.playersLeft--;
+              game.kissee = randomPlayerOrComp
+              console.log("kissee changed to: ", game.kissee)
+            } else { // or if they are dead
+              randomPlayerOrComp = playerOrCompKeys[Math.floor(Math.random() * playerOrCompKeys.length)];
+            }
+          } else { //if it is a comp...
+            if (!comps[randomPlayerOrComp].isDead) { //...and they are not dead
+              game.allPlayersAndComps.allComps[randomPlayerOrComp].isDead = true;
+              game.kissee = randomPlayerOrComp
+              console.log("kissee changed to: ", game.kissee)
+            } else { // or if they are dead
+              randomPlayerOrComp = playerOrCompKeys[Math.floor(Math.random() * playerOrCompKeys.length)];
+            }
+          }
+        }
+      }
+      
     },
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
     },
+    compTurns: (myPlayerId, {game}) => {
+      if (game.playersReady.length === 4) {
 
+      }
+    }
     //   //Make into separate functions
-    //   // Mark kissee as as dead
-    //   if (players[kissee]) {
-    //     const gameWithNewDeadPlayer = game;
-    //     gameWithNewDeadPlayer.allPlayersAndComps.allPlayers[kissee].isDead = true;
-    //       setGame(gameWithNewDeadPlayer);
-    //       game.playersLeft--;
-    //     } else {
-    //     game.allPlayersAndComps.allPlayers[kissee].isDead = true;
-    //     game.playersLeft--;
-    //   }
-
+     
     //   // Check to see if any player is a winner
     //   if (game.playersLeft === 1) {
     //     const losers = game.allPlayerIds.filter(id => game.allPlayersAndComps.allPlayers[id].isDead);
