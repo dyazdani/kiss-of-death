@@ -63,9 +63,9 @@ Rune.initLogic({
     allPlayerIds,
     turnOrder: [
       ...allPlayerIds,
-      ...Array(12 - allPlayerIds.length)
-        .fill('comp')
-        .map((element, i) => `${element}${i}`)
+      // ...Array(12 - allPlayerIds.length)
+      //   .fill('comp')
+      //   .map((element, i) => `${element}${i}`)
     ]
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
@@ -130,7 +130,9 @@ Rune.initLogic({
           }
         }
       }
-      
+
+      setKissee();
+      game.kissee = "";
     },
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
