@@ -33,6 +33,7 @@ export interface GameState {
   allPlayersAndComps: PlayersAndCompsObject
   turnOrder: string[]
   kissee: string
+  playersReady: string[]
   count: number
   gameOver: boolean
   playersLeft: number
@@ -41,6 +42,7 @@ export interface GameState {
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
+  handleGoButtonClick: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -88,6 +90,7 @@ Rune.initLogic({
             }
           }), {}))
       },
+    playersReady: [],
     kissee: "",
     count: 0,
     gameOver: false,
@@ -105,8 +108,10 @@ Rune.initLogic({
       const randomPlayerOrComp = allKeys[Math.floor(Math.random() * allKeys.length)];
 
       game.kissee = randomPlayerOrComp;
-      console.log(myPlayerId)
 
+    },
+    handleGoButtonClick: (myPlayerId, {game}) => {
+      game.playersReady.push(myPlayerId);
     },
 
     //   //Make into separate functions

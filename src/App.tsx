@@ -5,20 +5,19 @@ import PlayerCircle from "./components/PlayerCircle.tsx"
 
 function App() {
   const [game, setGame] = useState<GameState>()
-  const [myPlayerId, setmyPlayerId] = useState("")
+  const [myPlayerId, setMyPlayerId] = useState("")
+  // const [playersReady, setPlayersReady] = useState<string[]>([])
 
   useEffect(() => {
-    import("./logic").then(() => {
       Rune.initClient({
         onChange: ({ newGame, yourPlayerId }) => {
           setGame(newGame)
 
           if (yourPlayerId) {
-            setmyPlayerId(yourPlayerId)
+            setMyPlayerId(yourPlayerId)
           }
           }
       })
-    })
   }, [])
 
   if (!game) {
@@ -33,8 +32,17 @@ function App() {
     // Use div in the middle of the circle for game updates 
     <>
       <h1>Kiss of Death</h1>
+      <button 
+        type="button" 
+        onClick={() => {Rune.actions.handleGoButtonClick(myPlayerId)}}
+        disabled={game.playersReady.includes(myPlayerId)}
+        className={`${game.playersReady.includes(myPlayerId) ? "hidden" : ""}`}
+      >
+        🟢 GO!
+      </button>
       <PlayerCircle allPlayerIds={game.allPlayerIds}/>
       <button 
+        className={`${game.playersReady.length < 4 ? "hidden" : ""}`}
         disabled={
           myPlayerId !== game.turnOrder[0] || game.allPlayersAndComps.allPlayers[myPlayerId].isDead
         } 
