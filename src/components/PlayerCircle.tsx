@@ -5,7 +5,7 @@ interface PlayerCircleProps {
 }
 
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
-
+// TODO: rename comps starting with "comp0"
 const PlayerCircle = ({allPlayerIds}: PlayerCircleProps) => {
     return (
         <div className="circle-wrapper"> 

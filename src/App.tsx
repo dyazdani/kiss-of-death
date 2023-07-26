@@ -5,16 +5,19 @@ import PlayerCircle from "./components/PlayerCircle.tsx"
 
 function App() {
   const [game, setGame] = useState<GameState>()
-  const [playerWhoSpun, setPlayerWhoSpun] = useState('')
+  const [myPlayerId, setmyPlayerId] = useState("")
 
   useEffect(() => {
-    Rune.initClient({
-      onChange: ({ newGame, action }) => {
-        setGame(newGame)
-        if (action) {
-          setPlayerWhoSpun(action.playerId)
-        }
-      }
+    import("./logic").then(() => {
+      Rune.initClient({
+        onChange: ({ newGame, yourPlayerId }) => {
+          setGame(newGame)
+
+          if (yourPlayerId) {
+            setmyPlayerId(yourPlayerId)
+          }
+          }
+      })
     })
   }, [])
 
@@ -26,7 +29,9 @@ function App() {
     <>
       <h1>Kiss of Death</h1>
       <PlayerCircle allPlayerIds={game.allPlayerIds}/>
-      <button type="button" onClick={() => {Rune.actions.spinBottle({game: game, playerId: playerWhoSpun})}}>Spin the Bottle</button>
+      <button type="button" onClick={() => {Rune.actions.spinBottle(myPlayerId)}}>Spin the Bottle</button>
+      <p>{`It is ${game.turnOrder[0]}'s turn`}</p>
+      <p>{typeof game.kissee === "string" && game.kissee.length > 0 && `The bottle pointed to ${game.kissee}, who was kissed and then died`}</p>
     </>
   )
 }
