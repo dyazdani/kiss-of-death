@@ -29,7 +29,15 @@ function App() {
     <>
       <h1>Kiss of Death</h1>
       <PlayerCircle allPlayerIds={game.allPlayerIds}/>
-      <button type="button" onClick={() => {Rune.actions.spinBottle(myPlayerId)}}>Spin the Bottle</button>
+      <button 
+        disabled={
+          myPlayerId !== game.turnOrder[0] || game.allPlayersAndComps.allPlayers[myPlayerId].isDead
+        } 
+        type="button" 
+        onClick={() => {
+          Rune.actions.spinBottle(myPlayerId)
+        }}
+        >Spin the Bottle</button>
       <p>{`It is ${game.turnOrder[0]}'s turn`}</p>
       <p>{typeof game.kissee === "string" && game.kissee.length > 0 && `The bottle pointed to ${game.kissee}, who was kissed and then died`}</p>
     </>

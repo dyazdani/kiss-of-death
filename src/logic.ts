@@ -97,13 +97,7 @@ Rune.initLogic({
     increment: ({ amount}, { game }) => {
       game.count += amount
     },
-    spinBottle: (myPlayerId, {game, playerId} ) => {
-      // Cannot spin bottle if not your turn or dead
-      // TODO: Gray out the button that does this action
-      if (playerId !== game.turnOrder[0] || game.allPlayersAndComps.allPlayers[playerId].isDead) {
-        throw Rune.invalidAction()
-      }
-      
+    spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee
       const players = game.allPlayersAndComps.allPlayers;
       const comps = game.allPlayersAndComps.allComps;
