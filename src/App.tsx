@@ -34,11 +34,11 @@ function App() {
       <h1>Kiss of Death</h1>
       <button 
         type="button" 
-        onClick={() => {Rune.actions.handleGoButtonClick(myPlayerId)}}
+        onClick={() => {Rune.actions.handleReadyButtonClick(myPlayerId)}}
         disabled={game.playersReady.includes(myPlayerId)}
-        className={`${game.playersReady.includes(myPlayerId) ? "hidden" : ""}`}
+        className={`${game.playersReady.length < 4 ? "" : "hidden"}`}
       >
-        🟢 GO!
+        🟢 I'M READY!
       </button>
       <PlayerCircle allPlayerIds={game.allPlayerIds}/>
       <button 

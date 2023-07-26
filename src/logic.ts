@@ -42,7 +42,7 @@ export interface GameState {
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
-  handleGoButtonClick: (myPlayerId: string) => void
+  handleReadyButtonClick: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -110,7 +110,7 @@ Rune.initLogic({
       game.kissee = randomPlayerOrComp;
 
     },
-    handleGoButtonClick: (myPlayerId, {game}) => {
+    handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
     },
 
