@@ -43,7 +43,6 @@ type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
   handleReadyButtonClick: (myPlayerId: string) => void
-  compTurns: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -63,9 +62,9 @@ Rune.initLogic({
     allPlayerIds,
     turnOrder: [
       ...allPlayerIds,
-      // ...Array(12 - allPlayerIds.length)
-      //   .fill('comp')
-      //   .map((element, i) => `${element}${i}`)
+      ...Array(12 - allPlayerIds.length)
+        .fill('comp')
+        .map((element, i) => `${element}${i}`)
     ]
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
@@ -137,11 +136,7 @@ Rune.initLogic({
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
     },
-    compTurns: (myPlayerId, {game}) => {
-      if (game.playersReady.length === 4) {
-
-      }
-    }
+  },
     //   //Make into separate functions
      
     //   // Check to see if any player is a winner
@@ -196,7 +191,6 @@ Rune.initLogic({
     //     game.allPlayers[playerId].hasMadeBombDecision = true;
     //   }
     // },
-  },
   events: {
     playerJoined: () => {
       // Handle player joined
