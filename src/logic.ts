@@ -17,8 +17,6 @@ import type { RuneClient } from "rune-games-sdk/multiplayer"
 
 export interface PlayersObject {
     [Player: string]: { 
-      hasMadeBombDecision: boolean
-      isUsingBomb: boolean
       isDead: boolean
   }
 }
@@ -63,8 +61,6 @@ Rune.initLogic({
         allPlayers: allPlayerIds
           .reduce((acc, curr) => ({
           ...acc, [curr]: {
-            hasMadeBombDecision: false, 
-            isUsingBomb: false, 
             isDead: false}
           }), {}),
     playersReady: [],
