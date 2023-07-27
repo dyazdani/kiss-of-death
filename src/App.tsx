@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react"
 import "./App.css"
+import { Players } from "rune-games-sdk/multiplayer"
 import { GameState } from "./logic.ts"
 import PlayerCircle from "./components/PlayerCircle.tsx"
 
 function App() {
   const [game, setGame] = useState<GameState>()
   const [myPlayerId, setMyPlayerId] = useState("")
-  // const [playersReady, setPlayersReady] = useState<string[]>([])
+  const [players, setPlayers] = useState<Players>()
 
   useEffect(() => {
       Rune.initClient({
-        onChange: ({ newGame, yourPlayerId }) => {
+        onChange: ({ newGame, yourPlayerId, players }) => {
           setGame(newGame)
+          setPlayers(players)
 
           if (yourPlayerId) {
             setMyPlayerId(yourPlayerId)
