@@ -1,3 +1,4 @@
+import Avatar from "./Avatar";
 import Player from "./Player";
 import { Players } from "rune-games-sdk/multiplayer";
 
@@ -13,28 +14,41 @@ const PlayerCircle = ({allPlayerIds, players}: PlayerCircleProps) => {
         <div className="circle-wrapper"> 
             <Player 
                 playerId={allPlayerIds[0]} 
-                circleDeg="deg-0" 
-                playerName={`${players[allPlayerIds[0]].displayName}`}
+                circleDeg="deg-45" 
+            />
+            <Avatar 
                 avatarUrl={`${players[allPlayerIds[0]].avatarUrl}`} 
+                circleDeg="deg-45" 
+                playerName={`${players[allPlayerIds[0]].displayName}`}
             />
             <Player 
                 playerId={allPlayerIds[1]} 
-                circleDeg="deg-90" 
-                playerName={`${players[allPlayerIds[1]].displayName}`}
-                avatarUrl={`${players[allPlayerIds[1]].avatarUrl}`}
+                circleDeg="deg-135"
+            />
+            <Avatar 
+                avatarUrl={`${players[allPlayerIds[1]].avatarUrl}`} 
+                circleDeg="deg-135"
+                playerName={`${players[allPlayerIds[1]].displayName}`} 
             />
             <Player 
                 playerId={allPlayerIds[2]} 
-                circleDeg="deg-180" 
-                playerName={`${players[allPlayerIds[2]].displayName}`} 
+                circleDeg="deg-225" 
+            />
+            <Avatar 
                 avatarUrl={`${players[allPlayerIds[2]].avatarUrl}`}
-                />
+                circleDeg="deg-225" 
+                playerName={`${players[allPlayerIds[2]].displayName}`} 
+            />
             <Player 
                 playerId={allPlayerIds[3]} 
-                circleDeg="deg-270" 
+                circleDeg="deg-315" 
+            />
+            <Avatar 
+                avatarUrl={`${players[allPlayerIds[3]].avatarUrl}`} 
+                circleDeg="deg-315"
                 playerName={`${players[allPlayerIds[3]].displayName}`}
-                avatarUrl={`${players[allPlayerIds[3]].avatarUrl}`}
-                />
+            />
+
         </div>
 
     )

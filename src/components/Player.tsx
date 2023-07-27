@@ -1,15 +1,12 @@
 interface PlayerProps {
     playerId: string
     circleDeg: string
-    playerName: string
-    avatarUrl: string
+
 } 
 
-const Player = ({playerId, circleDeg, playerName, avatarUrl}: PlayerProps) => {
+const Player = ({playerId, circleDeg }: PlayerProps) => {
     return (
-            <div id={playerId} className={`circle ${circleDeg}`}>{playerName}
-                <img className={`avatar ${playerId}`} src={avatarUrl}/>      
-            </div>
+            <div id={playerId} className={`circle ${circleDeg}`}></div>
     )
 }
 
