@@ -98,7 +98,7 @@ Rune.initLogic({
       game.kissee = "";
 
       // Check to see if any player is a winner
-      if (game.playersLeft === 1) {
+      if (game.playersLeft < 2) {
         const losers = game.allPlayerIds.filter(id => game.allPlayers[id].isDead);
         const loserOne = losers[0];
         const loserTwo = losers[1];
@@ -115,6 +115,21 @@ Rune.initLogic({
         })
       }
           
+      // Use turnOrder array to establish next player's turn
+      const slicedTurnOrder = game.turnOrder.slice(1);
+      game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
+
+
+      // If player is dead...
+        while (game.allPlayers[game.turnOrder[0]].isDead) {
+          // Go to next player
+          const slicedTurnOrder = game.turnOrder.slice(1);
+          game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
+        }
+
+      console.log("turnOrder: ", game.turnOrder)
+      console.log("playersLeft: ", game.playersLeft)
+
     },
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
@@ -126,29 +141,8 @@ Rune.initLogic({
 
       
 
-    //   // Use turnOrder array to establish next player's turn
-    //   const slicedTurnOrder = game.turnOrder.slice(1);
-    //   game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
 
-    //   // If the player with the next turn is in the allPlayers object
-    //   if (game.allPlayersAndComps.allPlayers[game.turnOrder[0]]) {
-    //     // And if that player is dead...
-    //     if (game.allPlayersAndComps.allPlayers[game.turnOrder[0]].isDead) {
-    //       // Remove them from the turOrder array
-    //       game.turnOrder = game.turnOrder.slice(1);
-    //     }
-    //   }
-
-    //   // If the player with the next turn is in the allComps object
-    //   if (game.allPlayersAndComps.allComps[game.turnOrder[0]]) {
-    //     // And if that player is dead...
-    //     if (game.allPlayersAndComps.allComps[game.turnOrder[0]].isDead) {
-    //       // Remove them from the turOrder array
-    //       game.turnOrder = game.turnOrder.slice(1);
-    //     }
-    //   }
      
-    // },
 
     // STRETCH GOAL
     // useBomb: ({ game, playerId }) => {
