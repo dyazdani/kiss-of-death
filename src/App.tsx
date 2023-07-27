@@ -29,7 +29,7 @@ function App() {
     // TODO: Use players' avatars
     // TODO: Use images for comps
     // TODO: Use sound for kiss/komodo dragon
-    // Use div in the middle of the circle for game updates 
+    // TODO: Use div in the middle of the circle for game updates 
     <>
       <h1>Kiss of Death</h1>
       <button 
