@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import "./App.css"
-import { Players } from "rune-games-sdk/multiplayer"
 import { GameState } from "./logic.ts"
+import { Players } from "rune-games-sdk/multiplayer"
 import PlayerCircle from "./components/PlayerCircle.tsx"
 
 function App() {
   const [game, setGame] = useState<GameState>()
   const [myPlayerId, setMyPlayerId] = useState("")
-  const [players, setPlayers] = useState<Players>()
+  const [players, setPlayers] = useState<Players>({})
 
   useEffect(() => {
       Rune.initClient({
@@ -42,7 +42,7 @@ function App() {
       >
         🟢 I'M READY!
       </button>
-      <PlayerCircle allPlayerIds={game.allPlayerIds}/>
+      <PlayerCircle allPlayerIds={game.allPlayerIds} players={players}/>
       <button 
         className={`${game.playersReady.length < 4 ? "hidden" : ""}`}
         disabled={
