@@ -15,9 +15,11 @@
 .circle-wrapper {
   width:301px;
   height:301px;
-  border-radius:51%;
-  background:Chartreuse;
+  border-radius:50%;
+  background: conic-gradient(purple 90deg, #386394 90deg 180deg, green 180deg 270deg, red 270deg);
   position:relative;
+  display: inline-grid;
+  place-content: center;
 }
 
 .circle {
