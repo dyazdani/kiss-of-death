@@ -23,14 +23,9 @@ export interface PlayersObject {
   }
 }
 
-export interface PlayersAndCompsObject {
-  allPlayers: PlayersObject
-  allComps: PlayersObject
-}
-
 export interface GameState {
   allPlayerIds: string[]
-  allPlayersAndComps: PlayersAndCompsObject
+  allPlayers: PlayersObject
   turnOrder: string[]
   kissee: string
   playersReady: string[]
@@ -60,16 +55,10 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: (allPlayerIds: string[]): GameState => ({
     allPlayerIds,
-    turnOrder: [
-      ...allPlayerIds,
-      ...Array(12 - allPlayerIds.length)
-        .fill('comp')
-        .map((element, i) => `${element}${i}`)
-    ]
+    turnOrder: allPlayerIds
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value),
-      allPlayersAndComps: {
         // An object with player objects
         allPlayers: allPlayerIds
           .reduce((acc, curr) => ({
@@ -78,18 +67,6 @@ Rune.initLogic({
             isUsingBomb: false, 
             isDead: false}
           }), {}),
-        // object with of all computer players AKA bots as objects
-        allComps: (Array(12 - allPlayerIds.length) 
-          .fill('comp')
-          .map((element, i) => `${element}${i}`)
-          .reduce((acc, curr) => ({
-            ...acc, [curr]: {
-              hasMadeBombDecision: false, 
-              isUsingBomb: false, 
-              isDead: false
-            }
-          }), {}))
-      },
     playersReady: [],
     kissee: "",
     count: 0,
@@ -103,30 +80,19 @@ Rune.initLogic({
     spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee
       const setKissee = () => {
-        const players = game.allPlayersAndComps.allPlayers;
-        const comps = game.allPlayersAndComps.allComps;
-        const playerOrCompKeys = [...Object.keys(players), ...Object.keys(comps)]
-        let randomPlayerOrComp = playerOrCompKeys[Math.floor(Math.random() * playerOrCompKeys.length)];
+        const players = game.allPlayers;
+        const playerKeys = Object.keys(players)
+        let randomPlayer = playerKeys[Math.floor(Math.random() * playerKeys.length)];
 
-        while (!game.kissee) {
-          if (players[randomPlayerOrComp]) { // If it is a player...
-            if (!players[randomPlayerOrComp].isDead) { //...and they are not dead
-              game.allPlayersAndComps.allPlayers[randomPlayerOrComp].isDead = true;
+        while (!game.kissee) { 
+            if (!players[randomPlayer].isDead) { // if player is not dead
+              game.allPlayers[randomPlayer].isDead = true;
               game.playersLeft--;
-              game.kissee = randomPlayerOrComp
+              game.kissee = randomPlayer
               console.log("kissee changed to: ", game.kissee)
             } else { // or if they are dead
-              randomPlayerOrComp = playerOrCompKeys[Math.floor(Math.random() * playerOrCompKeys.length)];
+              randomPlayer = playerKeys[Math.floor(Math.random() * playerKeys.length)];
             }
-          } else { //if it is a comp...
-            if (!comps[randomPlayerOrComp].isDead) { //...and they are not dead
-              game.allPlayersAndComps.allComps[randomPlayerOrComp].isDead = true;
-              game.kissee = randomPlayerOrComp
-              console.log("kissee changed to: ", game.kissee)
-            } else { // or if they are dead
-              randomPlayerOrComp = playerOrCompKeys[Math.floor(Math.random() * playerOrCompKeys.length)];
-            }
-          }
         }
       }
 
