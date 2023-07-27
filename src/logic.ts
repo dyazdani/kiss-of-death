@@ -57,12 +57,12 @@ Rune.initLogic({
       .map((value: string) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value),
-        // An object with player objects
-        allPlayers: allPlayerIds
-          .reduce((acc, curr) => ({
-          ...acc, [curr]: {
-            isDead: false}
-          }), {}),
+    // An object with player objects
+    allPlayers: allPlayerIds
+      .reduce((acc, curr) => ({
+      ...acc, [curr]: {
+        isDead: false}
+    }), {}),
     playersReady: [],
     kissee: "",
     count: 0,
@@ -78,7 +78,8 @@ Rune.initLogic({
       const setKissee = () => {
         const players = game.allPlayers;
         const playerKeys = Object.keys(players)
-        let randomPlayer = playerKeys[Math.floor(Math.random() * playerKeys.length)];
+        const playerKeysWithoutKisser = playerKeys.filter(el => el !== myPlayerId);
+        let randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
 
         while (!game.kissee) { 
             if (!players[randomPlayer].isDead) { // if player is not dead
@@ -87,7 +88,7 @@ Rune.initLogic({
               game.kissee = randomPlayer
               console.log("kissee changed to: ", game.kissee)
             } else { // or if they are dead
-              randomPlayer = playerKeys[Math.floor(Math.random() * playerKeys.length)];
+              randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
             }
         }
       }
