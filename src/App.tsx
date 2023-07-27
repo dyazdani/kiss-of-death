@@ -44,7 +44,7 @@ function App() {
       <button 
         className={`${game.playersReady.length < 4 ? "hidden" : ""}`}
         disabled={
-          myPlayerId !== game.turnOrder[0] || game.allPlayersAndComps.allPlayers[myPlayerId].isDead
+          myPlayerId !== game.turnOrder[0] || game.allPlayers[myPlayerId].isDead
         } 
         type="button" 
         onClick={() => {
