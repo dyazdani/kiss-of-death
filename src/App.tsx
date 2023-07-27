@@ -34,6 +34,7 @@ function App() {
     // TODO: Use sound for kiss/komodo dragon
     // TODO: Use div in the middle of the circle for game updates 
     <>
+      <h1>Kiss of Death</h1>
       <div className="avatar-wrapper">
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[0]].avatarUrl}`} 
@@ -59,7 +60,7 @@ function App() {
           animal="king-cobra"
         />
       </div>
-      <h1>Kiss of Death</h1>
+      <PlayerCircle />
       <button 
         type="button" 
         onClick={() => {Rune.actions.handleReadyButtonClick(myPlayerId)}}
@@ -68,7 +69,6 @@ function App() {
       >
         🟢 I'M READY!
       </button>
-      <PlayerCircle />
       <button 
         className={`${game.playersReady.length < 4 ? "hidden" : ""}`}
         disabled={
