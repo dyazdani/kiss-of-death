@@ -1,9 +1,10 @@
 interface AnimalTokenProps {
     picFilePath: string
+    circleDeg: string
 }
-const AnimalToken = ({picFilePath}: AnimalTokenProps) => {
+const AnimalToken = ({picFilePath, circleDeg}: AnimalTokenProps) => {
     return (
-        <div className="animal-token-wrapper">
+        <div className={`animal-token circle ${circleDeg}`}>
             <img src={picFilePath} />
         </div>
 

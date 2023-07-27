@@ -30,7 +30,6 @@
   width:50px;
   height:50px;
   margin:-25.5px;
-  background:red;
   border-radius:51%;
   text-align:left;
   line-height:50px;
@@ -41,50 +40,28 @@
 
 }
 
-.deg-0 {
-  transform:translate(151px)
+.animal-token {
+  background: white;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  padding: 10px;
 }
 
+
 .deg-45 {
-  transform:rotate(46deg) translate(200px) rotate(-46deg);
+  transform:rotate(46deg) translate(100px) rotate(-46deg);
 }
 
 .deg-135 {
-  transform:rotate(136deg) translate(200px) rotate(-136deg);
+  transform:rotate(136deg) translate(100px) rotate(-136deg);
 }
 
 .deg-225 {
-  transform:rotate(226deg) translate(200px) rotate(-226deg);
+  transform:rotate(226deg) translate(100px) rotate(-226deg);
 }
 
 .deg-315 {
-  transform:rotate(316deg) translate(200px) rotate(-316deg);
-}
-
-.deg-150 {
-  transform:rotate(151deg) translate(151px) rotate(-151deg);
-}
-
-.deg-180 {
-  transform:rotate(181deg) translate(151px) rotate(-181deg);
-}
-
-.deg-210 {
-  transform:rotate(211deg) translate(151px) rotate(-211deg);
-}
-
-.deg-240 {
-  transform:rotate(241deg) translate(151px) rotate(-241deg);
-}
-
-.deg-270 {
-  transform:rotate(271deg) translate(151px) rotate(-271deg);
-}
-
-.deg-300 {
-  transform:rotate(301deg) translate(151px) rotate(-301deg);
-}
-
-.deg-330 {
-  transform:rotate(331deg) translate(151px) rotate(-331deg);
+  transform:rotate(316deg) translate(100px) rotate(-316deg);
 }
