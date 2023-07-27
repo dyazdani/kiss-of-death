@@ -114,7 +114,7 @@ Rune.initLogic({
           }
         })
       }
-          
+      
       // Use turnOrder array to establish next player's turn
       const slicedTurnOrder = game.turnOrder.slice(1);
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
@@ -129,21 +129,13 @@ Rune.initLogic({
 
       console.log("turnOrder: ", game.turnOrder)
       console.log("playersLeft: ", game.playersLeft)
+      
 
     },
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
     },
   },
-    //   //Make into separate functions
-     
-
-
-      
-
-
-     
-
     // STRETCH GOAL
     // useBomb: ({ game, playerId }) => {
     //   if (!game.allPlayers[playerId].isDead) {
