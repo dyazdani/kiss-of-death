@@ -50,6 +50,7 @@
   height: 40px;
   display: flex;
   flex-flow: column nowrap;
+  padding: 5px;
 }
 
 .player-name {
@@ -62,8 +63,31 @@
   height: 50px;
   width: 50px;
   display: flex;
-  padding: 10px;
+  justify-content: center;
+
 }
+
+.black-widow {
+  background: #386394;
+  border-radius: 50%
+}
+
+.poison-dart-frog {
+  background: purple;
+  border-radius: 50%
+}
+
+.komodo-dragon {
+  background: red;
+  border-radius: 50%
+}
+
+.king-cobra {
+  background: green;
+  border-radius: 50%
+}
+
+
 
 
 .deg-45 {

@@ -38,19 +38,26 @@ function App() {
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[0]].avatarUrl}`} 
           playerName={`${players[game.allPlayerIds[0]].displayName}`}
+          animal="black-widow"
+
         />      
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[1]].avatarUrl}`}  
           playerName={`${players[game.allPlayerIds[1]].displayName}`}
+          animal="komodo-dragon"
+
         />
-      <Avatar 
-        avatarUrl={`${players[game.allPlayerIds[2]].avatarUrl}`} 
-        playerName={`${players[game.allPlayerIds[2]].displayName}`}
-      />
-      <Avatar 
-        avatarUrl={`${players[game.allPlayerIds[3]].avatarUrl}`} 
-        playerName={`${players[game.allPlayerIds[3]].displayName}`}
-      />
+        <Avatar 
+          avatarUrl={`${players[game.allPlayerIds[2]].avatarUrl}`} 
+          playerName={`${players[game.allPlayerIds[2]].displayName}`}
+          animal="poison-dart-frog"
+
+        />
+        <Avatar 
+          avatarUrl={`${players[game.allPlayerIds[3]].avatarUrl}`} 
+          playerName={`${players[game.allPlayerIds[3]].displayName}`}
+          animal="king-cobra"
+        />
       </div>
       <h1>Kiss of Death</h1>
       <button 
