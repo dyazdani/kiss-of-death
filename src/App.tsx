@@ -8,9 +8,6 @@ function App() {
   const [myPlayerId, setMyPlayerId] = useState("")
   // const [playersReady, setPlayersReady] = useState<string[]>([])
 
-  console.dir(game)
-  console.log("myPlayerId: ", myPlayerId)
-
   useEffect(() => {
       Rune.initClient({
         onChange: ({ newGame, yourPlayerId }) => {

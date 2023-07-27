@@ -87,6 +87,7 @@ Rune.initLogic({
               game.playersLeft--;
               game.kissee = randomPlayer
               console.log("kissee changed to: ", game.kissee)
+              console.log(game.allPlayers[game.kissee])
             } else { // or if they are dead
               randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
             }
@@ -95,6 +96,25 @@ Rune.initLogic({
 
       setKissee();
       game.kissee = "";
+
+      // Check to see if any player is a winner
+      if (game.playersLeft === 1) {
+        const losers = game.allPlayerIds.filter(id => game.allPlayers[id].isDead);
+        const loserOne = losers[0];
+        const loserTwo = losers[1];
+        const loserThree = losers[2];
+        const winner = game.allPlayerIds.filter(id => !game.allPlayers[id].isDead)[0];
+        console.log(winner, losers)
+        Rune.gameOver({
+          players: {
+            [winner]: "WON",
+          [loserOne]: "LOST",
+            [loserTwo]: "LOST",
+            [loserThree]: "LOST",
+          }
+        })
+      }
+          
     },
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
@@ -102,19 +122,7 @@ Rune.initLogic({
   },
     //   //Make into separate functions
      
-    //   // Check to see if any player is a winner
-    //   if (game.playersLeft === 1) {
-    //     const losers = game.allPlayerIds.filter(id => game.allPlayersAndComps.allPlayers[id].isDead);
-    //     const winner = game.allPlayerIds.filter(id => !game.allPlayersAndComps.allPlayers[id].isDead)[0];
-    //     Rune.gameOver({
-    //       players: {
-    //         [winner]: "WON",
-    //         [losers[0]]: "LOST",
-    //         [losers[1]]: "LOST",
-    //         [losers[3]]: "LOST",
-    //       }
-    //     })
-    //   }
+
 
       
 
