@@ -3,6 +3,7 @@ import "./App.css"
 import { GameState } from "./logic.ts"
 import { Players } from "rune-games-sdk/multiplayer"
 import PlayerCircle from "./components/PlayerCircle.tsx"
+import Avatar from "./components/Avatar.tsx"
 
 function App() {
   const [game, setGame] = useState<GameState>()
@@ -33,6 +34,24 @@ function App() {
     // TODO: Use sound for kiss/komodo dragon
     // TODO: Use div in the middle of the circle for game updates 
     <>
+      <div className="avatar-wrapper">
+        <Avatar 
+          avatarUrl={`${players[game.allPlayerIds[0]].avatarUrl}`} 
+          playerName={`${players[game.allPlayerIds[0]].displayName}`}
+        />      
+        <Avatar 
+          avatarUrl={`${players[game.allPlayerIds[1]].avatarUrl}`}  
+          playerName={`${players[game.allPlayerIds[1]].displayName}`}
+        />
+      <Avatar 
+        avatarUrl={`${players[game.allPlayerIds[2]].avatarUrl}`} 
+        playerName={`${players[game.allPlayerIds[2]].displayName}`}
+      />
+      <Avatar 
+        avatarUrl={`${players[game.allPlayerIds[3]].avatarUrl}`} 
+        playerName={`${players[game.allPlayerIds[3]].displayName}`}
+      />
+      </div>
       <h1>Kiss of Death</h1>
       <button 
         type="button" 
@@ -42,7 +61,7 @@ function App() {
       >
         🟢 I'M READY!
       </button>
-      <PlayerCircle allPlayerIds={game.allPlayerIds} players={players}/>
+      <PlayerCircle />
       <button 
         className={`${game.playersReady.length < 4 ? "hidden" : ""}`}
         disabled={

@@ -36,8 +36,24 @@
   display: flex;
 }
 
-.player-name {
+.avatar-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 80vw;
+  height: 10vh;
+  justify-content: center;
+  gap: 10vw;
+}
 
+.avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.player-name {
+  margin-top: 10px;
 }
 
 .animal-token {

@@ -1,14 +1,13 @@
 
 interface AvatarProps {
     avatarUrl: string
-    circleDeg: string
     playerName: string
 }
 
-const Avatar = ({avatarUrl, circleDeg, playerName}: AvatarProps) => {
+const Avatar = ({avatarUrl, playerName}: AvatarProps) => {
     return (
         <>
-            <div className={`avatar circle ${circleDeg}`}>
+            <div className={`avatar`}>
                 <img src={avatarUrl}/>
                 <p className="player-name">{playerName}</p>      
             </div>
