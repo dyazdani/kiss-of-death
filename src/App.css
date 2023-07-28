@@ -24,6 +24,10 @@ h1 {
   background: #2dc702;
 }
 
+.green:disabled {
+  background: #d5d5d5;
+}
+
 .spin-bottle {
   width: 40px;
   height: 60px;
@@ -56,6 +60,7 @@ outline: solid black 1px;
   display: inline-grid;
   place-content: center;
   margin: 10px 0;
+  align-self: center;
 }
 
 .circle {
@@ -79,6 +84,7 @@ outline: solid black 1px;
   justify-content: center;
   gap: 10vw;
   margin-bottom: 20px;
+  align-self: center;
 }
 
 .avatar {
