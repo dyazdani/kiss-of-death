@@ -5,6 +5,8 @@ import { Players } from "rune-games-sdk/multiplayer"
 import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
+import kiss from "./assets/kiss.mp3"
+import backgroundMusic from "./assets/background-music.mp3"
 
 function App() {
   const [game, setGame] = useState<GameState>()
@@ -93,6 +95,7 @@ function App() {
         }}
         ></button>
         <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
+        <audio src={backgroundMusic} autoPlay={true} loop={true} />
     </>
   )
 }
