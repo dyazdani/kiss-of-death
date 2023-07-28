@@ -28,17 +28,16 @@ h1 {
 }
 
 .circle {
-  display:block;
   position:absolute;
   top:51%;
   left:51%;
   width:50px;
   height:50px;
-  margin:-25.5px;
+  margin:-38.5px;
   border-radius:51%;
-  text-align:left;
-  line-height:50px;
-  display: flex;
+  /* text-align:left; */
+  /* line-height:50px; */
+  /* display: flex; */
 }
 
 .avatar-wrapper {
@@ -59,6 +58,12 @@ h1 {
   padding: 5px;
 }
 
+.animal-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
 .player-name {
   margin-top: 10px;
 }
@@ -66,9 +71,10 @@ h1 {
 .animal-token {
   background: white;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
   display: flex;
+  align-items: center;
   justify-content: center;
 
 }

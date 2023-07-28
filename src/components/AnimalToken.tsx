@@ -5,7 +5,7 @@ interface AnimalTokenProps {
 const AnimalToken = ({picFilePath, circleDeg}: AnimalTokenProps) => {
     return (
         <div className={`animal-token circle ${circleDeg}`}>
-            <img src={picFilePath} />
+            <img className="animal-img" src={picFilePath} />
         </div>
 
     )
