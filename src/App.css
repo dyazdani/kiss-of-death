@@ -5,7 +5,6 @@
   text-align: center;
   display: flex;
   flex-flow: column nowrap;
-  gap: 20px;
 }
 
 h1 {
@@ -18,14 +17,20 @@ h1 {
 
 .green {
   background: #36f700;
+  margin-top: 20px;
+  font-size: 2rem;
 }
 
 .green:hover {
   background: #2dc702;
+  margin-top: 20px;
+  font-size: 2rem;
 }
 
 .green:disabled {
   background: #d5d5d5;
+  margin-top: 20px;
+  font-size: 2rem;
 }
 
 .spin-bottle {
@@ -44,7 +49,7 @@ outline: solid black 1px;
 }
 
 .bottle-paragraph {
-  margin-top: 0;;
+  margin-top: 10px;
 }
 
 .hidden {
@@ -56,14 +61,15 @@ outline: solid black 1px;
 }
 
 .circle-wrapper {
-  width:301px;
-  height:301px;
+  width: 276px;
+  height:276px;
   border-radius:50%;
   background: conic-gradient(#948d02 90deg, #386394 90deg 180deg, green 180deg 270deg, #843737 270deg);
   position:relative;
   display: inline-grid;
   place-content: center;
-  margin: 10px 0;
+  margin-top: 15px;
+  margin-bottom: 20px;
   align-self: center;
 }
 
@@ -88,12 +94,13 @@ outline: solid black 1px;
   justify-content: center;
   gap: 10vw;
   margin-bottom: 20px;
+  margin-top: 25px;
   align-self: center;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   display: flex;
   flex-flow: column nowrap;
   padding: 5px;
@@ -107,17 +114,26 @@ outline: solid black 1px;
 
 .player-name {
   margin-top: 10px;
+  font-size: .8rem;
 }
 
 .arrow-wrapper {
   display: flex;
   flex-flow: row nowrap;
-  flex-flow: row nowrap;
   width: 80vw;
-  height: 3vh;
+  height: 1vh;
   justify-content: center;
   gap: 10vw;
   align-self: center;
+  margin-bottom: 5px;
+}
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 5px;
 }
 
 .animal-token {
@@ -155,17 +171,17 @@ outline: solid black 1px;
 
 
 .deg-45 {
-  transform:rotate(46deg) translate(100px) rotate(-46deg);
+  transform:rotate(46deg) translate(85px) rotate(-46deg);
 }
 
 .deg-135 {
-  transform:rotate(136deg) translate(100px) rotate(-136deg);
+  transform:rotate(136deg) translate(85px) rotate(-136deg);
 }
 
 .deg-225 {
-  transform:rotate(226deg) translate(100px) rotate(-226deg);
+  transform:rotate(226deg) translate(85px) rotate(-226deg);
 }
 
 .deg-315 {
-  transform:rotate(316deg) translate(100px) rotate(-316deg);
+  transform:rotate(316deg) translate(85px) rotate(-316deg);
 }
