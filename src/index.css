@@ -27,6 +27,7 @@ button {
   background-color: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
+  align-self: center;
 }
 button:hover {
   background-color: #d2d2d2;
