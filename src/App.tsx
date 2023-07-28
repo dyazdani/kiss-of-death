@@ -79,7 +79,7 @@ function App() {
           Rune.actions.spinBottle(myPlayerId)
         }}
         ></button>
-        <p className={`${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle</p>
+        <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle</p>
       <p>{game.playersReady.length < 4 ? "" : `It is ${game.turnOrder[0]}'s turn`}</p>
       <p>{typeof game.kissee === "string" && game.kissee.length > 0 && `The bottle pointed to ${game.kissee}, who was kissed and then died`}</p>
     </>
