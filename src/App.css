@@ -10,6 +10,10 @@
 
 h1 {
   margin: 5px 0;
+  font-family: 'Eater', cursive;
+  color: #aac945;
+  background: #565a2f;
+  border-radius: 5px;
 }
 
 .hidden {
