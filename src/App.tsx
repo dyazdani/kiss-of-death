@@ -6,12 +6,23 @@ import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
 import kiss from "./assets/kiss.mp3"
-import backgroundMusic from "./assets/background-music.mp3"
+// import backgroundMusic from "./assets/background-music.mp3"
 
 function App() {
   const [game, setGame] = useState<GameState>()
   const [myPlayerId, setMyPlayerId] = useState("")
   const [players, setPlayers] = useState<Players>({})
+
+  const kissSound = new Audio(kiss);
+  const startKiss = () => {
+    kissSound.play();
+  }
+
+    //TODO: Get music to work
+  // const music = new Audio(backgroundMusic);
+  // const startMusic = () => {
+  //   music.play();
+  // }
 
   useEffect(() => {
       Rune.initClient({
@@ -31,11 +42,6 @@ function App() {
   }
 
   return (
-    // TODO: use the players' display names 
-    // TODO: Use players' avatars
-    // TODO: Use images for comps
-    // TODO: Use sound for kiss/komodo dragon
-    // TODO: Use div in the middle of the circle for game updates 
     <>
       <h1>Kiss of Death</h1>
       <TurnArrows 
@@ -78,7 +84,12 @@ function App() {
         player4={players[game.allPlayerIds[3]].playerId}/>
       <button 
         type="button" 
-        onClick={() => {Rune.actions.handleReadyButtonClick(myPlayerId)}}
+        onClick={() => {
+          Rune.actions.handleReadyButtonClick(myPlayerId)
+          // if (game.playersReady.length === 3) {
+          //   startMusic();
+          // }
+        }}
         disabled={game.playersReady.includes(myPlayerId)}
         className={`green ${game.playersReady.length < 4 ? "" : "hidden"}`}
       >
@@ -91,11 +102,11 @@ function App() {
         } 
         type="button" 
         onClick={() => {
+          startKiss();
           Rune.actions.spinBottle(myPlayerId)
         }}
         ></button>
         <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
-        <audio src={backgroundMusic} autoPlay={true} loop={true} />
     </>
   )
 }
