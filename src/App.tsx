@@ -75,7 +75,7 @@ function App() {
         disabled={game.playersReady.includes(myPlayerId)}
         className={`green ${game.playersReady.length < 4 ? "" : "hidden"}`}
       >
-        GO
+        GO!
       </button>
       <button 
         className={`spin-bottle ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
