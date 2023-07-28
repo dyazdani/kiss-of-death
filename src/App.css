@@ -116,6 +116,10 @@ outline: solid black 1px;
   display: none;
 }
 
+.skull {
+  font-size: 2.5rem;
+}
+
 .player-name {
   margin-top: 10px;
   font-size: .8rem;
