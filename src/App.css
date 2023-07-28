@@ -112,6 +112,10 @@ outline: solid black 1px;
   object-fit: contain;
 }
 
+.dead {
+  display: none;
+}
+
 .player-name {
   margin-top: 10px;
   font-size: .8rem;

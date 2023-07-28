@@ -68,7 +68,12 @@ function App() {
           animal="king-cobra"
         />
       </div>
-      <PlayerCircle />
+      <PlayerCircle 
+        allPlayersObject={game.allPlayers} 
+        player1={players[game.allPlayerIds[0]].playerId}
+        player2={players[game.allPlayerIds[1]].playerId}
+        player3={players[game.allPlayerIds[2]].playerId}
+        player4={players[game.allPlayerIds[3]].playerId}/>
       <button 
         type="button" 
         onClick={() => {Rune.actions.handleReadyButtonClick(myPlayerId)}}
