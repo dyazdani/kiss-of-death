@@ -126,6 +126,7 @@ outline: solid black 1px;
   gap: 10vw;
   align-self: center;
   margin-bottom: 5px;
+  min-width: 300px;
 }
 
 .arrow {

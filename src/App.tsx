@@ -87,7 +87,7 @@ function App() {
           Rune.actions.spinBottle(myPlayerId)
         }}
         ></button>
-        <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle</p>
+        <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
     </>
   )
 }
