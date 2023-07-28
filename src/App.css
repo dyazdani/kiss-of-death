@@ -51,11 +51,15 @@ outline: solid black 1px;
   display: none;
 }
 
+.arrow-wrapper.hidden {
+  display: none;
+}
+
 .circle-wrapper {
   width:301px;
   height:301px;
   border-radius:50%;
-  background: conic-gradient(purple 90deg, #386394 90deg 180deg, green 180deg 270deg, red 270deg);
+  background: conic-gradient(#948d02 90deg, #386394 90deg 180deg, green 180deg 270deg, #843737 270deg);
   position:relative;
   display: inline-grid;
   place-content: center;
@@ -105,6 +109,17 @@ outline: solid black 1px;
   margin-top: 10px;
 }
 
+.arrow-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  width: 80vw;
+  height: 3vh;
+  justify-content: center;
+  gap: 10vw;
+  align-self: center;
+}
+
 .animal-token {
   background: white;
   border-radius: 50%;
@@ -122,12 +137,12 @@ outline: solid black 1px;
 }
 
 .poison-dart-frog {
-  background: purple;
+  background: #948d02;
   border-radius: 50%
 }
 
 .komodo-dragon {
-  background: red;
+  background: #a24b4b;
   border-radius: 50%
 }
 

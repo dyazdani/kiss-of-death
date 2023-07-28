@@ -4,6 +4,7 @@ import { GameState } from "./logic.ts"
 import { Players } from "rune-games-sdk/multiplayer"
 import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
+import TurnArrows from "./components/TurnArrows.tsx"
 
 function App() {
   const [game, setGame] = useState<GameState>()
@@ -35,6 +36,13 @@ function App() {
     // TODO: Use div in the middle of the circle for game updates 
     <>
       <h1>Kiss of Death</h1>
+      <TurnArrows 
+        player1={players[game.allPlayerIds[0]].playerId}
+        player2={players[game.allPlayerIds[1]].playerId}
+        player3={players[game.allPlayerIds[2]].playerId}
+        player4={players[game.allPlayerIds[3]].playerId}
+        playersReady={game.playersReady.length}
+        currentTurnPlayer={game.turnOrder[0]}/>
       <div className="avatar-wrapper">
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[0]].avatarUrl}`} 
