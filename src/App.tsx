@@ -70,7 +70,7 @@ function App() {
         READY
       </button>
       <button 
-        className={`${game.playersReady.length < 4 ? "hidden" : ""}`}
+        className={`spin-bottle ${game.playersReady.length < 4 ? "hidden" : ""}`}
         disabled={
           myPlayerId !== game.turnOrder[0] || game.allPlayers[myPlayerId].isDead
         } 
@@ -78,7 +78,7 @@ function App() {
         onClick={() => {
           Rune.actions.spinBottle(myPlayerId)
         }}
-        >Spin the Bottle</button>
+        ></button>
       <p>{game.playersReady.length < 4 ? "" : `It is ${game.turnOrder[0]}'s turn`}</p>
       <p>{typeof game.kissee === "string" && game.kissee.length > 0 && `The bottle pointed to ${game.kissee}, who was kissed and then died`}</p>
     </>

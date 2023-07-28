@@ -24,6 +24,25 @@ h1 {
   background: #2dc702;
 }
 
+.spin-bottle {
+  width: 40px;
+  height: 60px;
+  background: center / contain no-repeat url("./assets/bottle-green.png") #f0f0f0 ;
+  border: #f0f0f0 solid 10px;
+  outline: solid black 1px;
+  transition: none;
+}
+
+.spin-bottle:hover {
+border: #d1d1d1 solid 10px;
+background: center / contain no-repeat url("./assets/bottle-green.png") #d1d1d1;
+outline: solid black 1px;
+
+
+
+}
+
+
 .hidden {
   display: none;
 }
