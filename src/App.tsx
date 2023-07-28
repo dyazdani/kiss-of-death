@@ -65,9 +65,9 @@ function App() {
         type="button" 
         onClick={() => {Rune.actions.handleReadyButtonClick(myPlayerId)}}
         disabled={game.playersReady.includes(myPlayerId)}
-        className={`${game.playersReady.length < 4 ? "" : "hidden"}`}
+        className={`green ${game.playersReady.length < 4 ? "" : "hidden"}`}
       >
-        🟢 I'M READY!
+        READY
       </button>
       <button 
         className={`${game.playersReady.length < 4 ? "hidden" : ""}`}
