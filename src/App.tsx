@@ -13,13 +13,7 @@ function App() {
   const [game, setGame] = useState<GameState>()
   const [myPlayerId, setMyPlayerId] = useState("")
   const [players, setPlayers] = useState<Players>({})
-  const [hasGameStarted, setHasGameStarted] = useState(false)
-
-    //TODO: Get music to work
-  // const music = new Audio(backgroundMusic);
-  // const startMusic = () => {
-  //   music.play();
-  // }
+  const [hasMusicStarted, setHasMusicStarted] = useState(false)
 
   useEffect(() => {
       Rune.initClient({
@@ -32,13 +26,13 @@ function App() {
             startKiss();
           }
 
-          if (!hasGameStarted) {
+          if (!hasMusicStarted && newGame.playersReady.length === 4) {
             const music = new Audio(backgroundMusic)
             const startMusic = () => {
               music.play();
             }
             startMusic();
-            setHasGameStarted(true);
+            setHasMusicStarted(true);
           }
 
           setGame(newGame)
@@ -63,6 +57,7 @@ function App() {
         player2={players[game.allPlayerIds[1]].playerId}
         player3={players[game.allPlayerIds[2]].playerId}
         player4={players[game.allPlayerIds[3]].playerId}
+        playersReady={game.playersReady.length}
         currentTurnPlayer={game.turnOrder[0]}/>
       <div className="avatar-wrapper">
         <Avatar 
@@ -95,9 +90,18 @@ function App() {
         player2={players[game.allPlayerIds[1]].playerId}
         player3={players[game.allPlayerIds[2]].playerId}
         player4={players[game.allPlayerIds[3]].playerId}/>
-  
+        <button 
+          type="button" 
+          onClick={() => {
+            Rune.actions.handleReadyButtonClick(myPlayerId);
+          }}
+          disabled={game.playersReady.includes(myPlayerId)}
+          className={`green ${game.playersReady.length < 4 ? "" : "hidden"}`}
+      >
+        START!
+      </button>
       <button 
-        className={`spin-bottle ${myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
+        className={`spin-bottle ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
         disabled={
           myPlayerId !== game.turnOrder[0] || game.allPlayers[myPlayerId].isDead
         } 
@@ -106,7 +110,7 @@ function App() {
           Rune.actions.spinBottle(myPlayerId);
         }}
         ></button>
-        <p className={`bottle-paragraph ${myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
+        <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
     </>
   )
 }

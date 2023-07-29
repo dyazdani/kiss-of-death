@@ -28,14 +28,13 @@ export interface GameState {
   kissee: string
   playersReady: string[]
   count: number
-  hasGameStarted: boolean
   playersLeft: number
 }
 
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
-  markGameStarted: (myPlayerId: string) => void
+  handleReadyButtonClick: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -66,15 +65,14 @@ Rune.initLogic({
     playersReady: [],
     kissee: "",
     count: 0,
-    hasGameStarted: false,
     playersLeft: 4
   }),
   actions: {
     increment: ({ amount}, { game }) => {
       game.count += amount
     },
-    markGameStarted: (myPlayerId, {game}) => {
-      game.hasGameStarted = true;
+    handleReadyButtonClick: (myPlayerId, {game}) => {
+      game.playersReady.push(myPlayerId);
     },
     spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee
