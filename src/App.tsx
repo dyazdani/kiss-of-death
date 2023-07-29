@@ -5,6 +5,7 @@ import { Players } from "rune-games-sdk/multiplayer"
 import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
+import kiss from "./assets/kiss.mp3"
 
 
 function App() {
@@ -20,9 +21,17 @@ function App() {
 
   useEffect(() => {
       Rune.initClient({
-        onChange: ({ newGame, yourPlayerId, players }) => {
+        onChange: ({ action, newGame, yourPlayerId, players }) => {
           // TODO: get this music to work
           // Rune.actions.playBackgroundMusic("string");
+          if (action && action.action === 'spinBottle') {
+            const kissSound = new Audio(kiss);
+            const startKiss = () => {
+              kissSound.play();
+            }
+            startKiss();
+          }
+
           setGame(newGame)
           setPlayers(players)
 
@@ -45,7 +54,6 @@ function App() {
         player2={players[game.allPlayerIds[1]].playerId}
         player3={players[game.allPlayerIds[2]].playerId}
         player4={players[game.allPlayerIds[3]].playerId}
-        playersReady={game.playersReady.length}
         currentTurnPlayer={game.turnOrder[0]}/>
       <div className="avatar-wrapper">
         <Avatar 
@@ -78,29 +86,18 @@ function App() {
         player2={players[game.allPlayerIds[1]].playerId}
         player3={players[game.allPlayerIds[2]].playerId}
         player4={players[game.allPlayerIds[3]].playerId}/>
+  
       <button 
-        type="button" 
-        onClick={() => {
-          Rune.actions.handleReadyButtonClick(myPlayerId);
-
-        }}
-        disabled={game.playersReady.includes(myPlayerId)}
-        className={`green ${game.playersReady.length < 4 ? "" : "hidden"}`}
-      >
-        START!
-      </button>
-      <button 
-        className={`spin-bottle ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
+        className={`spin-bottle ${myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
         disabled={
           myPlayerId !== game.turnOrder[0] || game.allPlayers[myPlayerId].isDead
         } 
         type="button" 
         onClick={() => {
           Rune.actions.spinBottle(myPlayerId);
-          Rune.actions.playKissSound();
         }}
         ></button>
-        <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
+        <p className={`bottle-paragraph ${myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
     </>
   )
 }

@@ -14,8 +14,6 @@
 // Change turnOrder so the next person is at the front of the queue √
 
 import type { RuneClient } from "rune-games-sdk/multiplayer"
-import kiss from "./assets/kiss.mp3"
-import background from "./assets/background-music.mp3"
 
 export interface PlayersObject {
     [Player: string]: { 
@@ -37,8 +35,7 @@ export interface GameState {
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
-  handleReadyButtonClick: (myPlayerId: string) => void
-  playKissSound: () => void
+  // playKissSound: () => void
   // playBackgroundMusic: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
@@ -136,16 +133,14 @@ Rune.initLogic({
       
 
     },
-    playKissSound: () => {
-      const kissSound = new Audio(kiss);
-      const startKiss = () => {
-        kissSound.play();
-      }
-      startKiss();
-    },
-    handleReadyButtonClick: (myPlayerId, {game}) => {
-      game.playersReady.push(myPlayerId);
-    },
+    // playKissSound: () => {
+    //   const kissSound = new Audio(kiss);
+    //   const startKiss = () => {
+    //     kissSound.play();
+    //   }
+    //   startKiss();
+    // },
+
     // TODO: get this music to work, perhaps this way?
     // playBackgroundMusic: (myPlayerId, {game}) => {
     //     if (!game.hasMusicStarted) {
