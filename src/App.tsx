@@ -5,7 +5,6 @@ import { Players } from "rune-games-sdk/multiplayer"
 import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
-import Music from "./components/Music.tsx"
 
 
 function App() {
@@ -22,6 +21,8 @@ function App() {
   useEffect(() => {
       Rune.initClient({
         onChange: ({ newGame, yourPlayerId, players }) => {
+          // TODO: get this music to work
+          // Rune.actions.playBackgroundMusic("string");
           setGame(newGame)
           setPlayers(players)
 
@@ -80,15 +81,13 @@ function App() {
       <button 
         type="button" 
         onClick={() => {
-          Rune.actions.handleReadyButtonClick(myPlayerId)
-          // if (game.playersReady.length === 3) {
-          //   startMusic();
-          // }
+          Rune.actions.handleReadyButtonClick(myPlayerId);
+
         }}
         disabled={game.playersReady.includes(myPlayerId)}
         className={`green ${game.playersReady.length < 4 ? "" : "hidden"}`}
       >
-        GO!
+        START!
       </button>
       <button 
         className={`spin-bottle ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
@@ -102,7 +101,6 @@ function App() {
         }}
         ></button>
         <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
-        <Music areAllPlayersReady={game.playersReady.length == 4} />
     </>
   )
 }

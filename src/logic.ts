@@ -15,6 +15,7 @@
 
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 import kiss from "./assets/kiss.mp3"
+import background from "./assets/background-music.mp3"
 
 export interface PlayersObject {
     [Player: string]: { 
@@ -29,7 +30,7 @@ export interface GameState {
   kissee: string
   playersReady: string[]
   count: number
-  gameOver: boolean
+  hasMusicStarted: boolean
   playersLeft: number
 }
 
@@ -38,6 +39,7 @@ type GameActions = {
   spinBottle: (myPlayerId: string) => void
   handleReadyButtonClick: (myPlayerId: string) => void
   playKissSound: () => void
+  // playBackgroundMusic: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -68,7 +70,7 @@ Rune.initLogic({
     playersReady: [],
     kissee: "",
     count: 0,
-    gameOver: false,
+    hasMusicStarted: false,
     playersLeft: 4
   }),
   actions: {
@@ -136,7 +138,6 @@ Rune.initLogic({
     },
     playKissSound: () => {
       const kissSound = new Audio(kiss);
-      kissSound.volume = 1.2;
       const startKiss = () => {
         kissSound.play();
       }
@@ -145,6 +146,17 @@ Rune.initLogic({
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
     },
+    // TODO: get this music to work, perhaps this way?
+    // playBackgroundMusic: (myPlayerId, {game}) => {
+    //     if (!game.hasMusicStarted) {
+    //       const backgroundMusic = new Audio(background);
+    //       const startBackgroundMusic = () => {
+    //         backgroundMusic.play();
+    //       }
+    //       startBackgroundMusic();
+    //       game.hasMusicStarted = true;
+    //     }
+    // }
   },
     // STRETCH GOAL
     // useBomb: ({ game, playerId }) => {
