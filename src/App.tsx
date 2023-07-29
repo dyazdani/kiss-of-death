@@ -5,18 +5,13 @@ import { Players } from "rune-games-sdk/multiplayer"
 import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
-import kiss from "./assets/kiss.mp3"
-// import backgroundMusic from "./assets/background-music.mp3"
+import Music from "./components/Music.tsx"
+
 
 function App() {
   const [game, setGame] = useState<GameState>()
   const [myPlayerId, setMyPlayerId] = useState("")
   const [players, setPlayers] = useState<Players>({})
-
-  const kissSound = new Audio(kiss);
-  const startKiss = () => {
-    kissSound.play();
-  }
 
     //TODO: Get music to work
   // const music = new Audio(backgroundMusic);
@@ -102,11 +97,12 @@ function App() {
         } 
         type="button" 
         onClick={() => {
-          startKiss();
-          Rune.actions.spinBottle(myPlayerId)
+          Rune.actions.spinBottle(myPlayerId);
+          Rune.actions.playKissSound();
         }}
         ></button>
         <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
+        <Music areAllPlayersReady={game.playersReady.length == 4} />
     </>
   )
 }
