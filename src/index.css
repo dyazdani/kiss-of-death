@@ -24,13 +24,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f9f9f9;
+  background: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
   align-self: center;
 }
 button:hover {
-  background-color: #d2d2d2;
+  background: #d2d2d2;
 }
 button:focus,
 button:focus-visible {

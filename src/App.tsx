@@ -7,6 +7,7 @@ import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
 import kiss from "./assets/kiss.mp3"
 import backgroundMusic from "./assets/background-music.mp3"
+import ChooseAnimal from "./components/ChooseAnimal.tsx"
 
 
 function App() {
@@ -63,25 +64,22 @@ function App() {
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[0]].avatarUrl}`} 
           playerName={`${players[game.allPlayerIds[0]].displayName}`}
-          animal="black-widow"
-
+          animal={`${game.allPlayers[game.allPlayerIds[0]].animal}`}
         />      
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[1]].avatarUrl}`}  
           playerName={`${players[game.allPlayerIds[1]].displayName}`}
-          animal="komodo-dragon"
-
+          animal={`${game.allPlayers[game.allPlayerIds[1]].animal}`}
         />
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[2]].avatarUrl}`} 
           playerName={`${players[game.allPlayerIds[2]].displayName}`}
-          animal="poison-dart-frog"
-
+          animal={`${game.allPlayers[game.allPlayerIds[2]].animal}`}
         />
         <Avatar 
           avatarUrl={`${players[game.allPlayerIds[3]].avatarUrl}`} 
           playerName={`${players[game.allPlayerIds[3]].displayName}`}
-          animal="king-cobra"
+          animal={`${game.allPlayers[game.allPlayerIds[3]].animal}`}
         />
       </div>
       <PlayerCircle 
@@ -90,7 +88,13 @@ function App() {
         player2={players[game.allPlayerIds[1]].playerId}
         player3={players[game.allPlayerIds[2]].playerId}
         player4={players[game.allPlayerIds[3]].playerId}/>
-        <button 
+      <div className="circle-wrapper">
+        <ChooseAnimal circleDeg="45" game={game} playerId={myPlayerId} animalName="black-widow"/>
+        <ChooseAnimal circleDeg="135" game={game} playerId={myPlayerId} animalName="king-cobra"/>
+        <ChooseAnimal circleDeg="225" game={game} playerId={myPlayerId} animalName="komodo-dragon"/>
+        <ChooseAnimal circleDeg="315" game={game} playerId={myPlayerId} animalName="poison-dart-frog"/>
+      </div>
+        <button
           type="button" 
           onClick={() => {
             Rune.actions.handleReadyButtonClick(myPlayerId);

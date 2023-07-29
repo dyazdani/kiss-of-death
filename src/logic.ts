@@ -18,6 +18,7 @@ import type { RuneClient } from "rune-games-sdk/multiplayer"
 export interface PlayersObject {
     [Player: string]: { 
       isDead: boolean
+      animal: string
   }
 }
 
@@ -35,6 +36,7 @@ type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
   handleReadyButtonClick: (myPlayerId: string) => void
+  assignAnimal: (chosenAnimal: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -60,7 +62,8 @@ Rune.initLogic({
     allPlayers: allPlayerIds
       .reduce((acc, curr) => ({
       ...acc, [curr]: {
-        isDead: false}
+        isDead: false,
+        animal: ""}
     }), {}),
     playersReady: [],
     kissee: "",
@@ -73,6 +76,9 @@ Rune.initLogic({
     },
     handleReadyButtonClick: (myPlayerId, {game}) => {
       game.playersReady.push(myPlayerId);
+    },
+    assignAnimal: (chosenAnimal, {game, playerId}) => {
+      game.allPlayers[playerId].animal = chosenAnimal;
     },
     spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee

@@ -3,7 +3,7 @@ import blackWidow from "./../assets/black-widow.png"
 import poisonDartFrog from "./../assets/poison-dart-frog.png"
 import komodoDragon from "./../assets/komodo-dragon.png"
 import kingCobra from "./../assets/king-cobra.png"
-import { PlayersObject } from "../logic";
+import { PlayersObject } from "./../logic";
 
 interface PlayerCircleProps {
     allPlayersObject: PlayersObject

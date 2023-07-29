@@ -153,31 +153,28 @@ outline: solid black 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  border: none;
 }
 
 .black-widow {
   background: #386394;
-  border-radius: 50%
+
 }
 
 .poison-dart-frog {
   background: #948d02;
-  border-radius: 50%
+
 }
 
 .komodo-dragon {
   background: #a24b4b;
-  border-radius: 50%
+
 }
 
 .king-cobra {
   background: green;
-  border-radius: 50%
+
 }
-
-
-
 
 .deg-45 {
   transform:rotate(46deg) translate(85px) rotate(-46deg);
@@ -193,4 +190,33 @@ outline: solid black 1px;
 
 .deg-315 {
   transform:rotate(316deg) translate(85px) rotate(-316deg);
+}
+
+.animal-token.choose {
+  height: 70px;
+  width: 70px;
+
+}
+
+.animal-button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  display: block;
+}
+
+.animal-button.black-widow {
+  background: center / contain no-repeat url("./assets/black-widow.png") white;
+}
+
+.animal-button.poison-dart-frog {
+  background: center / contain no-repeat url("./assets/poison-dart-frog.png") white;
+}
+
+.animal-button.komodo-dragon {
+  background: center / contain no-repeat url("./assets/komodo-dragon.png") white;
+}
+
+.animal-button.king-cobra {
+  background: center / contain no-repeat url("./assets/king-cobra.png") white;
 }
