@@ -28,15 +28,14 @@ export interface GameState {
   kissee: string
   playersReady: string[]
   count: number
-  hasMusicStarted: boolean
+  hasGameStarted: boolean
   playersLeft: number
 }
 
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
-  // playKissSound: () => void
-  // playBackgroundMusic: (myPlayerId: string) => void
+  markGameStarted: (myPlayerId: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -67,12 +66,15 @@ Rune.initLogic({
     playersReady: [],
     kissee: "",
     count: 0,
-    hasMusicStarted: false,
+    hasGameStarted: false,
     playersLeft: 4
   }),
   actions: {
     increment: ({ amount}, { game }) => {
       game.count += amount
+    },
+    markGameStarted: (myPlayerId, {game}) => {
+      game.hasGameStarted = true;
     },
     spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee
@@ -133,25 +135,6 @@ Rune.initLogic({
       
 
     },
-    // playKissSound: () => {
-    //   const kissSound = new Audio(kiss);
-    //   const startKiss = () => {
-    //     kissSound.play();
-    //   }
-    //   startKiss();
-    // },
-
-    // TODO: get this music to work, perhaps this way?
-    // playBackgroundMusic: (myPlayerId, {game}) => {
-    //     if (!game.hasMusicStarted) {
-    //       const backgroundMusic = new Audio(background);
-    //       const startBackgroundMusic = () => {
-    //         backgroundMusic.play();
-    //       }
-    //       startBackgroundMusic();
-    //       game.hasMusicStarted = true;
-    //     }
-    // }
   },
     // STRETCH GOAL
     // useBomb: ({ game, playerId }) => {

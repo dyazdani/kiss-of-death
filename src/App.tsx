@@ -6,12 +6,14 @@ import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
 import kiss from "./assets/kiss.mp3"
+import backgroundMusic from "./assets/background-music.mp3"
 
 
 function App() {
   const [game, setGame] = useState<GameState>()
   const [myPlayerId, setMyPlayerId] = useState("")
   const [players, setPlayers] = useState<Players>({})
+  const [hasGameStarted, setHasGameStarted] = useState(false)
 
     //TODO: Get music to work
   // const music = new Audio(backgroundMusic);
@@ -22,14 +24,21 @@ function App() {
   useEffect(() => {
       Rune.initClient({
         onChange: ({ action, newGame, yourPlayerId, players }) => {
-          // TODO: get this music to work
-          // Rune.actions.playBackgroundMusic("string");
           if (action && action.action === 'spinBottle') {
             const kissSound = new Audio(kiss);
             const startKiss = () => {
               kissSound.play();
             }
             startKiss();
+          }
+
+          if (!hasGameStarted) {
+            const music = new Audio(backgroundMusic)
+            const startMusic = () => {
+              music.play();
+            }
+            startMusic();
+            setHasGameStarted(true);
           }
 
           setGame(newGame)
