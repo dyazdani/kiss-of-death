@@ -1,18 +1,18 @@
-import { GameState } from "../logic"
-
 interface ChooseAnimalProps {
     animalName: string
-    game: GameState
-    playerId: string
     circleDeg: string
+    isDisabled: boolean
 }
 
-const ChooseAnimal = ({animalName, game, playerId, circleDeg}: ChooseAnimalProps) => {
+const ChooseAnimal = ({animalName, circleDeg, isDisabled}: ChooseAnimalProps) => {
     return (
-        <div className={`animal-token choose circle deg-${circleDeg}`}>
+        <div 
+            className={`animal-token circle deg-${circleDeg}`}
+            id={isDisabled ? `disabled-button-div-${animalName}` : ""}
+        >
             <button 
                 className={`animal-button ${animalName}`}
-                disabled={game && !!game.allPlayers[playerId].animal} 
+                disabled={isDisabled} 
                 type="button" 
                 onClick={() => {
                     Rune.actions.assignAnimal(animalName)

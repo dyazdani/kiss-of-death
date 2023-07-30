@@ -89,10 +89,34 @@ function App() {
         player3={players[game.allPlayerIds[2]].playerId}
         player4={players[game.allPlayerIds[3]].playerId}/>
       <div className="circle-wrapper">
-        <ChooseAnimal circleDeg="45" game={game} playerId={myPlayerId} animalName="black-widow"/>
-        <ChooseAnimal circleDeg="135" game={game} playerId={myPlayerId} animalName="king-cobra"/>
-        <ChooseAnimal circleDeg="225" game={game} playerId={myPlayerId} animalName="komodo-dragon"/>
-        <ChooseAnimal circleDeg="315" game={game} playerId={myPlayerId} animalName="poison-dart-frog"/>
+        <ChooseAnimal 
+          circleDeg="45" 
+          isDisabled={
+            game.allPlayers[myPlayerId].animal === "black-widow"
+          } 
+          animalName="black-widow"
+        />
+        <ChooseAnimal 
+          circleDeg="135" 
+          isDisabled={
+            game.allPlayers[myPlayerId].animal === "king-cobra"
+          } 
+          animalName="king-cobra"
+        />
+        <ChooseAnimal 
+          circleDeg="225"
+          isDisabled={
+            game.allPlayers[myPlayerId].animal === "komodo-dragon"
+          }  
+          animalName="komodo-dragon"
+        />
+        <ChooseAnimal 
+          circleDeg="315" 
+          isDisabled={
+            game.allPlayers[myPlayerId].animal === "poison-dart-frog"
+          } 
+          animalName="poison-dart-frog"
+        />
       </div>
         <button
           type="button" 

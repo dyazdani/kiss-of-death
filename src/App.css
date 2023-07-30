@@ -167,7 +167,7 @@ outline: solid black 1px;
 }
 
 .komodo-dragon {
-  background: #a24b4b;
+  background: #843737;
 
 }
 
@@ -192,12 +192,6 @@ outline: solid black 1px;
   transform:rotate(316deg) translate(85px) rotate(-316deg);
 }
 
-.animal-token.choose {
-  height: 70px;
-  width: 70px;
-
-}
-
 .animal-button {
   width: 50px;
   height: 50px;
@@ -205,18 +199,60 @@ outline: solid black 1px;
   display: block;
 }
 
+.animal-button:focus, 
+.animal-button:focus-visible {
+  outline: none;
+}
+
 .animal-button.black-widow {
   background: center / contain no-repeat url("./assets/black-widow.png") white;
+}
+
+.animal-button.black-widow:disabled {
+  background: #386394;
 }
 
 .animal-button.poison-dart-frog {
   background: center / contain no-repeat url("./assets/poison-dart-frog.png") white;
 }
 
+.animal-button.poison-dart-frog:disabled {
+  background: #948d02;
+}
+
 .animal-button.komodo-dragon {
   background: center / contain no-repeat url("./assets/komodo-dragon.png") white;
 }
 
+.animal-button.komodo-dragon:disabled {
+  background: #843737;
+}
+
 .animal-button.king-cobra {
   background: center / contain no-repeat url("./assets/king-cobra.png") white;
+}
+
+.animal-button.king-cobra:disabled {
+  background: green;
+}
+
+
+#disabled-button-div-black-widow {
+  background: #386394;
+
+}
+
+#disabled-button-div-poison-dart-frog {
+  background: #948d02;
+
+}
+
+#disabled-button-div-komodo-dragon {
+  background: #843737;
+
+}
+
+#disabled-button-div-king-cobra {
+  background: green;
+
 }
