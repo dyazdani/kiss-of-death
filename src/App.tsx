@@ -26,7 +26,7 @@ function App() {
             }
             startKiss();
           }
-
+          //TODO: fix the music starting again and again
           if (!hasMusicStarted && newGame.playersReady.length === 4) {
             const music = new Audio(backgroundMusic)
             const startMusic = () => {
@@ -45,6 +45,9 @@ function App() {
           }
       })
   }, [])
+
+  console.log(game?.playersReady)
+  console.log(hasMusicStarted)
 
   if (!game) {
     return <div>Loading...</div>
@@ -82,19 +85,21 @@ function App() {
           animal={`${game.allPlayers[game.allPlayerIds[3]].animal}`}
         />
       </div>
-      <PlayerCircle 
+      <PlayerCircle
+        allPlayersReady={game.playersReady.length === 4} 
         allPlayersObject={game.allPlayers} 
         player1={players[game.allPlayerIds[0]].playerId}
         player2={players[game.allPlayerIds[1]].playerId}
         player3={players[game.allPlayerIds[2]].playerId}
         player4={players[game.allPlayerIds[3]].playerId}/>
-      <div className="circle-wrapper">
+      <div className={`${game.playersReady.length === 4 ? "hidden" : ""} circle-wrapper`} >
         <ChooseAnimal 
           circleDeg="45" 
           isDisabled={
             game.animalsChosen.includes("black-widow")
           } 
           animalName="black-widow"
+          myPlayerId={myPlayerId}
         />
         <ChooseAnimal 
           circleDeg="135" 
@@ -102,6 +107,7 @@ function App() {
             game.animalsChosen.includes("king-cobra")          
           } 
           animalName="king-cobra"
+          myPlayerId={myPlayerId}
         />
         <ChooseAnimal 
           circleDeg="225"
@@ -109,6 +115,7 @@ function App() {
             game.animalsChosen.includes("komodo-dragon")          
           }  
           animalName="komodo-dragon"
+          myPlayerId={myPlayerId}
         />
         <ChooseAnimal 
           circleDeg="315" 
@@ -116,18 +123,9 @@ function App() {
             game.animalsChosen.includes("poison-dart-frog")          
           } 
           animalName="poison-dart-frog"
+          myPlayerId={myPlayerId}
         />
       </div>
-        <button
-          type="button" 
-          onClick={() => {
-            Rune.actions.handleReadyButtonClick(myPlayerId);
-          }}
-          disabled={game.playersReady.includes(myPlayerId)}
-          className={`green ${game.playersReady.length < 4 ? "" : "hidden"}`}
-      >
-        START!
-      </button>
       <button 
         className={`spin-bottle ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
         disabled={

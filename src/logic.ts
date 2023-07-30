@@ -77,7 +77,10 @@ Rune.initLogic({
       game.count += amount
     },
     handleReadyButtonClick: (myPlayerId, {game}) => {
-      game.playersReady.push(myPlayerId);
+      if (!game.allPlayers[myPlayerId].animal) {
+        game.playersReady.push(myPlayerId);
+      }
+
     },
     assignAnimal: (chosenAnimal, {game, playerId}) => {
       if (game.allPlayers[playerId].animal) {

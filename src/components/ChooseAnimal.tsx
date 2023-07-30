@@ -2,9 +2,10 @@ interface ChooseAnimalProps {
     animalName: string
     circleDeg: string
     isDisabled: boolean
+    myPlayerId: string
 }
 
-const ChooseAnimal = ({animalName, circleDeg, isDisabled}: ChooseAnimalProps) => {
+const ChooseAnimal = ({animalName, circleDeg, isDisabled, myPlayerId}: ChooseAnimalProps) => {
     return (
         <div 
             className={`animal-token circle deg-${circleDeg}`}
@@ -15,7 +16,9 @@ const ChooseAnimal = ({animalName, circleDeg, isDisabled}: ChooseAnimalProps) =>
                 disabled={isDisabled} 
                 type="button" 
                 onClick={() => {
+                    Rune.actions.handleReadyButtonClick(myPlayerId)
                     Rune.actions.assignAnimal(animalName)
+
                 }}
             >
             </button>

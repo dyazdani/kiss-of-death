@@ -11,13 +11,14 @@ interface PlayerCircleProps {
     player2: string
     player3: string
     player4: string
+    allPlayersReady: boolean
 }
 
 
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
-const PlayerCircle = ({allPlayersObject, player1, player2, player3, player4}: PlayerCircleProps) => {
+const PlayerCircle = ({allPlayersObject, player1, player2, player3, player4, allPlayersReady}: PlayerCircleProps) => {
     return (
-        <div className="circle-wrapper"> 
+        <div className={`circle-wrapper ${allPlayersReady ? "" : "hidden"}`}> 
             <AnimalToken  
                 picFilePath={blackWidow}
                 circleDeg="deg-45"

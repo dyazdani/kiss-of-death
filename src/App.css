@@ -15,24 +15,6 @@ h1 {
   border-radius: 5px;
 }
 
-.green {
-  background: #36f700;
-  margin-top: 20px;
-  font-size: 2.5rem;
-}
-
-.green:hover {
-  background: #2dc702;
-  margin-top: 20px;
-  font-size: 2.5rem;
-}
-
-.green:disabled {
-  background: #d5d5d5;
-  margin-top: 20px;
-  font-size: 2.5rem;
-}
-
 .spin-bottle {
   width: 50px;
   height: 70px;
@@ -255,5 +237,8 @@ outline: solid black 1px;
 
 #disabled-button-div-king-cobra {
   background: green;
+}
 
+.hidden.circle-wrapper {
+  display: none;
 }
