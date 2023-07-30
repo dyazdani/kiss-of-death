@@ -4,14 +4,16 @@ import poisonDartFrog from "./../assets/poison-dart-frog.png"
 import komodoDragon from "./../assets/komodo-dragon.png"
 import kingCobra from "./../assets/king-cobra.png"
 import { PlayersObject } from "./../logic";
+import Bottle from "./Bottle";
 
 interface PlayerCircleProps {
     allPlayersObject: PlayersObject
     playersReady: object[]
+    kissee: string
 }
 
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
-const PlayerCircle = ({allPlayersObject, playersReady}: PlayerCircleProps) => {
+const PlayerCircle = ({allPlayersObject, playersReady, kissee}: PlayerCircleProps) => {
 
     const getTargetPlayerId = (animalPlayerChose: string, playersReady: object[]) => {
         const indexWithTargetPlayerObject = playersReady.findIndex((obj: object) => Object.hasOwn(obj, animalPlayerChose));
@@ -47,6 +49,11 @@ const PlayerCircle = ({allPlayersObject, playersReady}: PlayerCircleProps) => {
                 isDead={playersReady.length === 4 &&
                     allPlayersObject[getTargetPlayerId("poison-dart-frog", playersReady)].isDead
                 }             
+            />
+            <Bottle 
+                playersReady={playersReady}
+                kissee={kissee}
+                allPlayersObject={allPlayersObject}
             />
         </div>
 

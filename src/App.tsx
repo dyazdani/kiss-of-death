@@ -19,34 +19,34 @@ function App() {
   const [players, setPlayers] = useState<Players>({})
 
   useEffect(() => {
-      Rune.initClient({
-        onChange: ({ action, newGame, yourPlayerId, players }) => {
-          if (action && action.action === 'spinBottle') {
-            const kissSound = new Audio(kiss);
-            const startKiss = () => {
-              kissSound.play();
-            }
-            startKiss();
+    Rune.initClient({
+      onChange: ({ action, newGame, yourPlayerId, players }) => {
+        if (action && action.action === 'killKissee') {
+          const kissSound = new Audio(kiss);
+          const startKiss = () => {
+            kissSound.play();
           }
-          if (
-              action && action.action === 'assignAnimal' && 
-              newGame.playersReady.length === 4
-          ) {
-            const music = new Audio(backgroundMusic);
-            const startMusic = () => {
-              music.play();
-          }
-            startMusic();
-          }
+          startKiss();
+        }
+        if (
+            action && action.action === 'assignAnimal' && 
+            newGame.playersReady.length === 4
+        ) {
+          const music = new Audio(backgroundMusic);
+          const startMusic = () => {
+            music.play();
+        }
+          startMusic();
+        }
 
-          setGame(newGame)
-          setPlayers(players)
+        setGame(newGame)
+        setPlayers(players)
 
-          if (yourPlayerId) {
-            setMyPlayerId(yourPlayerId)
-          }
-          }
-      })
+        if (yourPlayerId) {
+          setMyPlayerId(yourPlayerId)
+        }
+      }
+    })
   }, [])
 
   if (!game) {
@@ -88,9 +88,8 @@ function App() {
       <PlayerCircle
         playersReady={game.playersReady} 
         allPlayersObject={game.allPlayers}
+        kissee={game.kissee}
       />
-      <Bottle 
-        playersReady={game.playersReady}/>
       <div className={`${game.playersReady.length === 4 ? "hidden" : ""} circle-wrapper`} >
         <ChooseAnimal 
           circleDeg="45" 
@@ -129,7 +128,11 @@ function App() {
         } 
         type="button" 
         onClick={() => {
-          Rune.actions.spinBottle();
+          Rune.actions.determineKissee();
+          setTimeout(Rune.actions.killKissee, 3000);
+          setTimeout(Rune.actions.checkForGameEnd, 3001);
+          setTimeout(Rune.actions.nextTurn, 3002);
+
         }}
         ></button>
         <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>

@@ -29,10 +29,14 @@ export interface GameState {
   playersLeft: number
   animalsChosen: string[]
   hasGameStarted: boolean
+  kissee: string
 }
 
 type GameActions = {
-  spinBottle: () => void
+  nextTurn: () => void
+  determineKissee: () => void
+  killKissee: () => void
+  checkForGameEnd: () => void
   assignAnimal: (chosenAnimal: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
@@ -60,6 +64,7 @@ Rune.initLogic({
         animal: ""}
     }), {}),
     playersReady: [],
+    kissee: "",
     hasGameStarted: false,
     playersLeft: 4,
     animalsChosen: []
@@ -73,21 +78,24 @@ Rune.initLogic({
       game.animalsChosen.push(chosenAnimal);
       game.playersReady.push({[chosenAnimal]: playerId})
     },
-    spinBottle: (_, {game, playerId} ) => {
+    determineKissee: (_, {game, playerId}) => {
       // Determine random kissee
 
-        const players = game.allPlayers;
-        const playerKeys = Object.keys(players)
-        const playerKeysWithoutKisser = playerKeys.filter(el => el !== playerId);
-        let randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
+      const players = game.allPlayers;
+      const playerKeys = Object.keys(players)
+      const playerKeysWithoutKisser = playerKeys.filter(el => el !== playerId);
+      let randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
 
-        while (players[randomPlayer].isDead) {
-          randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
-        }
-        
-          game.allPlayers[randomPlayer].isDead = true;
-          game.playersLeft--;
-
+      while (players[randomPlayer].isDead) {
+        randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
+      }
+      game.kissee = randomPlayer;
+    },
+    killKissee: (_, {game}) => {
+      game.allPlayers[game.kissee].isDead = true;
+      game.playersLeft--;
+    },
+    checkForGameEnd: (_, {game}) => {
       // Check to see if any player is a winner
       if (game.playersLeft < 2) {
         const losers = game.allPlayerIds.filter(id => game.allPlayers[id].isDead);
@@ -104,11 +112,11 @@ Rune.initLogic({
           }
         })
       }
-      
+    },
+    nextTurn: (_, {game} ) => {
       // Use turnOrder array to establish next player's turn
       const slicedTurnOrder = game.turnOrder.slice(1);
       game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
-
 
       // If player is dead...
         while (game.allPlayers[game.turnOrder[0]].isDead) {

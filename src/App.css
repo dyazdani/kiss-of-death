@@ -5,6 +5,7 @@
   text-align: center;
   display: flex;
   flex-flow: column nowrap;
+  --kissee-angle: 0;
 }
 
 h1 {
@@ -17,7 +18,7 @@ h1 {
 
 .spin-bottle-button {
   width: 50px;
-  height: 70px;
+  height: 80px;
   background: center / contain no-repeat url("./assets/bottle-green.png") #f0f0f0 ;
   border: #f0f0f0 solid 10px;
   outline: solid black 1px;
@@ -241,4 +242,41 @@ outline: solid black 1px;
 
 .hidden.circle-wrapper {
   display: none;
+}
+
+.bottle-wrapper {
+  position: absolute;
+  top: 28%;
+  left: 47%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.bottle {
+  height: 70px;
+}
+
+.bottle-spinning {
+  transition: transform 3000ms ease-in-out;
+  transform: rotate(14400deg)
+}
+
+.rotate-45-deg {
+  transform: rotate(10000deg)
+}
+
+.rotate-135-deg {
+  transform: rotate(135deg)
+
+}
+
+.rotate-225-deg {
+  transform: rotate(225deg)
+
+}
+
+.rotate-315-deg {
+  transform: rotate(315deg)
+
 }
