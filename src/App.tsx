@@ -8,6 +8,7 @@ import TurnArrows from "./components/TurnArrows.tsx"
 import kiss from "./assets/kiss.mp3"
 import ChooseAnimal from "./components/ChooseAnimal.tsx"
 import backgroundMusic from "./assets/background-music.mp3"
+import Bottle from "./components/Bottle.tsx"
 
 
 
@@ -88,6 +89,8 @@ function App() {
         playersReady={game.playersReady} 
         allPlayersObject={game.allPlayers}
       />
+      <Bottle 
+        playersReady={game.playersReady}/>
       <div className={`${game.playersReady.length === 4 ? "hidden" : ""} circle-wrapper`} >
         <ChooseAnimal 
           circleDeg="45" 
@@ -120,7 +123,7 @@ function App() {
       </div>
       <h2 className={`choose-label ${game.playersReady.length === 4 ? "hidden" : ""}`}>Choose your animal!</h2>
       <button 
-        className={`spin-bottle ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
+        className={`spin-bottle-button ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
         disabled={
           myPlayerId !== game.turnOrder[0] || game.allPlayers[myPlayerId].isDead
         } 
