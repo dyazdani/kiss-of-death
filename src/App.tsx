@@ -48,8 +48,6 @@ function App() {
       })
   }, [])
 
-  console.log(game)
-
   if (!game) {
     return <div>Loading...</div>
   }

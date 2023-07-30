@@ -12,8 +12,6 @@ interface PlayerCircleProps {
 
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
 const PlayerCircle = ({allPlayersObject, playersReady}: PlayerCircleProps) => {
-    console.log(allPlayersObject)
-    console.log(playersReady)
 
     const getTargetPlayerId = (animalPlayerChose: string, playersReady: object[]) => {
         const indexWithTargetPlayerObject = playersReady.findIndex((obj: object) => Object.hasOwn(obj, animalPlayerChose));

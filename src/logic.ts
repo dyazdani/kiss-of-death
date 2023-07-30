@@ -88,8 +88,6 @@ Rune.initLogic({
               game.allPlayers[randomPlayer].isDead = true;
               game.playersLeft--;
               game.kissee = randomPlayer
-              console.log("kissee changed to: ", game.kissee)
-              console.log(game.allPlayers[game.kissee])
             } else { // or if they are dead
               randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
             }
@@ -106,7 +104,6 @@ Rune.initLogic({
         const loserTwo = losers[1];
         const loserThree = losers[2];
         const winner = game.allPlayerIds.filter(id => !game.allPlayers[id].isDead)[0];
-        console.log(winner, losers)
         Rune.gameOver({
           players: {
             [winner]: "WON",
@@ -128,11 +125,6 @@ Rune.initLogic({
           const slicedTurnOrder = game.turnOrder.slice(1);
           game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
         }
-
-      console.log("turnOrder: ", game.turnOrder)
-      console.log("playersLeft: ", game.playersLeft)
-      
-
     },
   },
     // STRETCH GOAL
