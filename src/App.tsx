@@ -126,6 +126,7 @@ function App() {
           myPlayerId={myPlayerId}
         />
       </div>
+      <h2 className={`choose-label ${game.playersReady.length === 4 ? "hidden" : ""}`}>Choose your animal!</h2>
       <button 
         className={`spin-bottle ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}
         disabled={
