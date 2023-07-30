@@ -30,6 +30,7 @@ export interface GameState {
   playersReady: string[]
   count: number
   playersLeft: number
+  animalsChosen: string[]
 }
 
 type GameActions = {
@@ -68,7 +69,8 @@ Rune.initLogic({
     playersReady: [],
     kissee: "",
     count: 0,
-    playersLeft: 4
+    playersLeft: 4,
+    animalsChosen: []
   }),
   actions: {
     increment: ({ amount}, { game }) => {
@@ -78,7 +80,11 @@ Rune.initLogic({
       game.playersReady.push(myPlayerId);
     },
     assignAnimal: (chosenAnimal, {game, playerId}) => {
+      if (game.allPlayers[playerId].animal) {
+        throw Rune.invalidAction();
+      }
       game.allPlayers[playerId].animal = chosenAnimal;
+      game.animalsChosen.push(chosenAnimal);
     },
     spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee

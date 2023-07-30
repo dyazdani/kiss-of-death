@@ -92,28 +92,28 @@ function App() {
         <ChooseAnimal 
           circleDeg="45" 
           isDisabled={
-            game.allPlayers[myPlayerId].animal === "black-widow"
+            game.animalsChosen.includes("black-widow")
           } 
           animalName="black-widow"
         />
         <ChooseAnimal 
           circleDeg="135" 
           isDisabled={
-            game.allPlayers[myPlayerId].animal === "king-cobra"
+            game.animalsChosen.includes("king-cobra")          
           } 
           animalName="king-cobra"
         />
         <ChooseAnimal 
           circleDeg="225"
           isDisabled={
-            game.allPlayers[myPlayerId].animal === "komodo-dragon"
+            game.animalsChosen.includes("komodo-dragon")          
           }  
           animalName="komodo-dragon"
         />
         <ChooseAnimal 
           circleDeg="315" 
           isDisabled={
-            game.allPlayers[myPlayerId].animal === "poison-dart-frog"
+            game.animalsChosen.includes("poison-dart-frog")          
           } 
           animalName="poison-dart-frog"
         />
