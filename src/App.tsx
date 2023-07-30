@@ -27,14 +27,14 @@ function App() {
             startKiss();
           }
           //TODO: fix the music starting again and again
-          if (!hasMusicStarted && newGame.playersReady.length === 4) {
-            const music = new Audio(backgroundMusic)
-            const startMusic = () => {
-              music.play();
-            }
-            startMusic();
-            setHasMusicStarted(true);
-          }
+          // if (!hasMusicStarted && newGame.playersReady.length === 4) {
+          //   const music = new Audio(backgroundMusic)
+          //   const startMusic = () => {
+          //     music.play();
+          //   }
+          //   startMusic();
+          //   setHasMusicStarted(true);
+          // }
 
           setGame(newGame)
           setPlayers(players)
