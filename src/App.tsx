@@ -6,15 +6,16 @@ import PlayerCircle from "./components/PlayerCircle.tsx"
 import Avatar from "./components/Avatar.tsx"
 import TurnArrows from "./components/TurnArrows.tsx"
 import kiss from "./assets/kiss.mp3"
-import backgroundMusic from "./assets/background-music.mp3"
 import ChooseAnimal from "./components/ChooseAnimal.tsx"
+import backgroundMusic from "./assets/background-music.mp3"
+
+
 
 
 function App() {
   const [game, setGame] = useState<GameState>()
   const [myPlayerId, setMyPlayerId] = useState("")
   const [players, setPlayers] = useState<Players>({})
-  const [hasMusicStarted, setHasMusicStarted] = useState(false)
 
   useEffect(() => {
       Rune.initClient({
@@ -26,15 +27,16 @@ function App() {
             }
             startKiss();
           }
-          //TODO: fix the music starting again and again
-          // if (!hasMusicStarted && newGame.playersReady.length === 4) {
-          //   const music = new Audio(backgroundMusic)
-          //   const startMusic = () => {
-          //     music.play();
-          //   }
-          //   startMusic();
-          //   setHasMusicStarted(true);
-          // }
+          if (
+              action && action.action === 'handleReadyButtonClick' && 
+              newGame.playersReady.length === 4
+          ) {
+            const music = new Audio(backgroundMusic);
+            const startMusic = () => {
+              music.play();
+          }
+            startMusic();
+          }
 
           setGame(newGame)
           setPlayers(players)
@@ -46,8 +48,7 @@ function App() {
       })
   }, [])
 
-  console.log(game?.playersReady)
-  console.log(hasMusicStarted)
+  console.log(game)
 
   if (!game) {
     return <div>Loading...</div>

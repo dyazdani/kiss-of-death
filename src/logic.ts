@@ -12,7 +12,6 @@
 // 2. If there is one person left, that person wins! √
 // STRETCH: If neither 1 or 2 are true, splice dead players from turnOrder array and continue.
 // Change turnOrder so the next person is at the front of the queue √
-
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
 export interface PlayersObject {
@@ -31,6 +30,7 @@ export interface GameState {
   count: number
   playersLeft: number
   animalsChosen: string[]
+  hasGameStarted: boolean
 }
 
 type GameActions = {
@@ -53,7 +53,8 @@ export function getCount(game: GameState) {
 Rune.initLogic({
   minPlayers: 4,
   maxPlayers: 4,
-  setup: (allPlayerIds: string[]): GameState => ({
+  setup: (allPlayerIds: string[]): GameState => {
+    return ({
     allPlayerIds,
     turnOrder: allPlayerIds
       .map((value: string) => ({ value, sort: Math.random() }))
@@ -67,11 +68,12 @@ Rune.initLogic({
         animal: ""}
     }), {}),
     playersReady: [],
+    hasGameStarted: false,
     kissee: "",
     count: 0,
     playersLeft: 4,
     animalsChosen: []
-  }),
+  })},
   actions: {
     increment: ({ amount}, { game }) => {
       game.count += amount
