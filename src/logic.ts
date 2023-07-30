@@ -27,15 +27,13 @@ export interface GameState {
   turnOrder: string[]
   kissee: string
   playersReady: object[]
-  count: number
   playersLeft: number
   animalsChosen: string[]
   hasGameStarted: boolean
 }
 
 type GameActions = {
-  increment: (params: { amount: number }) => void
-  spinBottle: (myPlayerId: string) => void
+  spinBottle: () => void
   assignAnimal: (chosenAnimal: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
@@ -43,10 +41,6 @@ type GameActions = {
 
 declare global {
   const Rune: RuneClient<GameState, GameActions>
-}
-
-export function getCount(game: GameState) {
-  return game.count
 }
 
 Rune.initLogic({
@@ -69,14 +63,10 @@ Rune.initLogic({
     playersReady: [],
     hasGameStarted: false,
     kissee: "",
-    count: 0,
     playersLeft: 4,
     animalsChosen: []
   })},
   actions: {
-    increment: ({ amount}, { game }) => {
-      game.count += amount
-    },
     assignAnimal: (chosenAnimal, {game, playerId}) => {
       if (game.allPlayers[playerId].animal) {
         throw Rune.invalidAction();
@@ -85,12 +75,12 @@ Rune.initLogic({
       game.animalsChosen.push(chosenAnimal);
       game.playersReady.push({[chosenAnimal]: playerId})
     },
-    spinBottle: (myPlayerId, {game} ) => {
+    spinBottle: (_, {game, playerId} ) => {
       // Determine random kissee
       const setKissee = () => {
         const players = game.allPlayers;
         const playerKeys = Object.keys(players)
-        const playerKeysWithoutKisser = playerKeys.filter(el => el !== myPlayerId);
+        const playerKeysWithoutKisser = playerKeys.filter(el => el !== playerId);
         let randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
 
         while (!game.kissee) { 

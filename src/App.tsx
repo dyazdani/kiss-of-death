@@ -97,7 +97,6 @@ function App() {
             game.animalsChosen.includes("black-widow")
           } 
           animalName="black-widow"
-          myPlayerId={myPlayerId}
         />
         <ChooseAnimal 
           circleDeg="135" 
@@ -105,7 +104,6 @@ function App() {
             game.animalsChosen.includes("king-cobra")          
           } 
           animalName="king-cobra"
-          myPlayerId={myPlayerId}
         />
         <ChooseAnimal 
           circleDeg="225"
@@ -113,7 +111,6 @@ function App() {
             game.animalsChosen.includes("komodo-dragon")          
           }  
           animalName="komodo-dragon"
-          myPlayerId={myPlayerId}
         />
         <ChooseAnimal 
           circleDeg="315" 
@@ -121,7 +118,6 @@ function App() {
             game.animalsChosen.includes("poison-dart-frog")          
           } 
           animalName="poison-dart-frog"
-          myPlayerId={myPlayerId}
         />
       </div>
       <h2 className={`choose-label ${game.playersReady.length === 4 ? "hidden" : ""}`}>Choose your animal!</h2>
@@ -132,7 +128,7 @@ function App() {
         } 
         type="button" 
         onClick={() => {
-          Rune.actions.spinBottle(myPlayerId);
+          Rune.actions.spinBottle();
         }}
         ></button>
         <p className={`bottle-paragraph ${game.playersReady.length === 4 && myPlayerId === game.turnOrder[0] ? "" : "hidden"}`}>Spin the bottle 💋</p>
