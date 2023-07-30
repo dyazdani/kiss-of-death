@@ -28,7 +28,7 @@ function App() {
             startKiss();
           }
           if (
-              action && action.action === 'handleReadyButtonClick' && 
+              action && action.action === 'assignAnimal' && 
               newGame.playersReady.length === 4
           ) {
             const music = new Audio(backgroundMusic);
@@ -87,12 +87,9 @@ function App() {
         />
       </div>
       <PlayerCircle
-        allPlayersReady={game.playersReady.length === 4} 
-        allPlayersObject={game.allPlayers} 
-        player1={players[game.allPlayerIds[0]].playerId}
-        player2={players[game.allPlayerIds[1]].playerId}
-        player3={players[game.allPlayerIds[2]].playerId}
-        player4={players[game.allPlayerIds[3]].playerId}/>
+        playersReady={game.playersReady} 
+        allPlayersObject={game.allPlayers}
+      />
       <div className={`${game.playersReady.length === 4 ? "hidden" : ""} circle-wrapper`} >
         <ChooseAnimal 
           circleDeg="45" 

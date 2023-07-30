@@ -26,7 +26,7 @@ export interface GameState {
   allPlayers: PlayersObject
   turnOrder: string[]
   kissee: string
-  playersReady: string[]
+  playersReady: object[]
   count: number
   playersLeft: number
   animalsChosen: string[]
@@ -36,7 +36,6 @@ export interface GameState {
 type GameActions = {
   increment: (params: { amount: number }) => void
   spinBottle: (myPlayerId: string) => void
-  handleReadyButtonClick: (myPlayerId: string) => void
   assignAnimal: (chosenAnimal: string) => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
@@ -78,18 +77,13 @@ Rune.initLogic({
     increment: ({ amount}, { game }) => {
       game.count += amount
     },
-    handleReadyButtonClick: (myPlayerId, {game}) => {
-      if (!game.allPlayers[myPlayerId].animal) {
-        game.playersReady.push(myPlayerId);
-      }
-
-    },
     assignAnimal: (chosenAnimal, {game, playerId}) => {
       if (game.allPlayers[playerId].animal) {
         throw Rune.invalidAction();
       }
       game.allPlayers[playerId].animal = chosenAnimal;
       game.animalsChosen.push(chosenAnimal);
+      game.playersReady.push({[chosenAnimal]: playerId})
     },
     spinBottle: (myPlayerId, {game} ) => {
       // Determine random kissee

@@ -16,7 +16,6 @@ const ChooseAnimal = ({animalName, circleDeg, isDisabled, myPlayerId}: ChooseAni
                 disabled={isDisabled} 
                 type="button" 
                 onClick={() => {
-                    Rune.actions.handleReadyButtonClick(myPlayerId)
                     Rune.actions.assignAnimal(animalName)
 
                 }}

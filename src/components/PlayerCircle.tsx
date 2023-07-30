@@ -7,37 +7,48 @@ import { PlayersObject } from "./../logic";
 
 interface PlayerCircleProps {
     allPlayersObject: PlayersObject
-    player1: string
-    player2: string
-    player3: string
-    player4: string
-    allPlayersReady: boolean
+    playersReady: object[]
 }
 
-
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
-const PlayerCircle = ({allPlayersObject, player1, player2, player3, player4, allPlayersReady}: PlayerCircleProps) => {
+const PlayerCircle = ({allPlayersObject, playersReady}: PlayerCircleProps) => {
+    console.log(allPlayersObject)
+    console.log(playersReady)
+
+    const getTargetPlayerId = (animalPlayerChose: string, playersReady: object[]) => {
+        const indexWithTargetPlayerObject = playersReady.findIndex((obj: object) => Object.hasOwn(obj, animalPlayerChose));
+        return Object.values(playersReady[indexWithTargetPlayerObject])[0];
+    }
+
     return (
-        <div className={`circle-wrapper ${allPlayersReady ? "" : "hidden"}`}> 
+        <div className={`circle-wrapper ${playersReady.length === 4 ? "" : "hidden"}`}> 
             <AnimalToken  
                 picFilePath={blackWidow}
                 circleDeg="deg-45"
-                isDead={allPlayersObject[player1].isDead} 
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("black-widow", playersReady)].isDead
+                    } 
             />
             <AnimalToken 
                 picFilePath={kingCobra}
                 circleDeg="deg-135"
-                isDead={allPlayersObject[player2].isDead}  
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("king-cobra", playersReady)].isDead
+                }
             />
             <AnimalToken 
                 picFilePath={komodoDragon}
                 circleDeg="deg-225"
-                isDead={allPlayersObject[player3].isDead}  
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("komodo-dragon", playersReady)].isDead
+                }            
             />
             <AnimalToken 
                 picFilePath={poisonDartFrog}
                 circleDeg="deg-315"   
-                isDead={allPlayersObject[player4].isDead}   
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("poison-dart-frog", playersReady)].isDead
+                }             
             />
         </div>
 
