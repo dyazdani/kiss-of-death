@@ -1,27 +1,55 @@
-import Player from "./Player";
+import AnimalToken from "./AnimalToken";
+import blackWidow from "./../assets/black-widow.png"
+import poisonDartFrog from "./../assets/poison-dart-frog.png"
+import komodoDragon from "./../assets/komodo-dragon.png"
+import kingCobra from "./../assets/king-cobra.png"
+import { PlayersObject } from "./../logic";
 
 interface PlayerCircleProps {
-    allPlayerIds: string[]
+    allPlayersObject: PlayersObject
+    playersReady: object[]
 }
 
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
-// TODO: rename comps starting with "comp0"
-const PlayerCircle = ({allPlayerIds}: PlayerCircleProps) => {
-    return (
-        <div className="circle-wrapper"> 
-            <Player playerId={allPlayerIds[0]} circleDeg="deg-0" playerName="P1" />
-            <Player playerId="comp1" circleDeg="deg-30" playerName="C1" />
-            <Player playerId="comp2" circleDeg="deg-60" playerName="C2" />
-            <Player playerId={allPlayerIds[1]} circleDeg="deg-90" playerName="P2" />
-            <Player playerId="comp3" circleDeg="deg-120" playerName="C3" />
-            <Player playerId="comp4" circleDeg="deg-150" playerName="C4" />
-            <Player playerId={allPlayerIds[2]} circleDeg="deg-180" playerName="P3" />
-            <Player playerId="comp5" circleDeg="deg-210" playerName="C5" />
-            <Player playerId="comp6" circleDeg="deg-240" playerName="C6" />
-            <Player playerId={allPlayerIds[3]} circleDeg="deg-270" playerName="P4" />
-            <Player playerId="comp7" circleDeg="deg-300" playerName="C7" />
-            <Player playerId="comp8" circleDeg="deg-330" playerName="C8" />
+const PlayerCircle = ({allPlayersObject, playersReady}: PlayerCircleProps) => {
+    console.log(allPlayersObject)
+    console.log(playersReady)
 
+    const getTargetPlayerId = (animalPlayerChose: string, playersReady: object[]) => {
+        const indexWithTargetPlayerObject = playersReady.findIndex((obj: object) => Object.hasOwn(obj, animalPlayerChose));
+        return Object.values(playersReady[indexWithTargetPlayerObject])[0];
+    }
+
+    return (
+        <div className={`circle-wrapper ${playersReady.length === 4 ? "" : "hidden"}`}> 
+            <AnimalToken  
+                picFilePath={blackWidow}
+                circleDeg="deg-45"
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("black-widow", playersReady)].isDead
+                    } 
+            />
+            <AnimalToken 
+                picFilePath={kingCobra}
+                circleDeg="deg-135"
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("king-cobra", playersReady)].isDead
+                }
+            />
+            <AnimalToken 
+                picFilePath={komodoDragon}
+                circleDeg="deg-225"
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("komodo-dragon", playersReady)].isDead
+                }            
+            />
+            <AnimalToken 
+                picFilePath={poisonDartFrog}
+                circleDeg="deg-315"   
+                isDead={playersReady.length === 4 &&
+                    allPlayersObject[getTargetPlayerId("poison-dart-frog", playersReady)].isDead
+                }             
+            />
         </div>
 
     )

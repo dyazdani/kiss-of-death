@@ -1,5 +1,5 @@
 :root {
-  background-color: #ffffff;
+  background-color: #e1f797;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,23 +14,26 @@ body {
   place-items: center;
   min-height: 100vh;
   overflow-x: hidden;
+  font-family: 'PT Serif', serif;
 }
 
-/* button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+button {
+  border-radius: 5px;
+  width: fit-content;
+  border: 1px solid black;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f9f9f9;
+  background: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
+  align-self: center;
+  outline: none;
 }
 button:hover {
-  border-color: #646cff;
+  background: #d2d2d2;
 }
-button:focus,
-button:focus-visible {
-  outline: 0;
-} */
+
+button:focus, button:focus-visible {
+  outline: 1px #565a2f solid;
+}
