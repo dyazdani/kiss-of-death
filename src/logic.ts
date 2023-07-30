@@ -25,7 +25,6 @@ export interface GameState {
   allPlayerIds: string[]
   allPlayers: PlayersObject
   turnOrder: string[]
-  kissee: string
   playersReady: object[]
   playersLeft: number
   animalsChosen: string[]
@@ -62,7 +61,6 @@ Rune.initLogic({
     }), {}),
     playersReady: [],
     hasGameStarted: false,
-    kissee: "",
     playersLeft: 4,
     animalsChosen: []
   })},
@@ -77,25 +75,18 @@ Rune.initLogic({
     },
     spinBottle: (_, {game, playerId} ) => {
       // Determine random kissee
-      const setKissee = () => {
+
         const players = game.allPlayers;
         const playerKeys = Object.keys(players)
         const playerKeysWithoutKisser = playerKeys.filter(el => el !== playerId);
         let randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
 
-        while (!game.kissee) { 
-            if (!players[randomPlayer].isDead) { // if player is not dead
-              game.allPlayers[randomPlayer].isDead = true;
-              game.playersLeft--;
-              game.kissee = randomPlayer
-            } else { // or if they are dead
-              randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
-            }
+        while (players[randomPlayer].isDead) {
+          randomPlayer = playerKeysWithoutKisser[Math.floor(Math.random() * playerKeysWithoutKisser.length)];
         }
-      }
-
-      setKissee();
-      game.kissee = "";
+        
+          game.allPlayers[randomPlayer].isDead = true;
+          game.playersLeft--;
 
       // Check to see if any player is a winner
       if (game.playersLeft < 2) {
