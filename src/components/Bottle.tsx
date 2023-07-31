@@ -1,6 +1,5 @@
 import bottle from "./../assets/bottle-green.png"
 import { PlayersObject } from "../logic"
-import { useState } from "react"
 
 interface BottleProps {
     playersReady: object[]
