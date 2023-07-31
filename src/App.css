@@ -257,10 +257,18 @@ outline: solid black 1px;
   height: 70px;
 }
 
-.bottle-spinning {
-  transition: transform 3000ms ease-in-out;
-  transform: rotate(14400deg)
+.bottle-spinning[alt='spinning'] {
+  animation: spinning 3000ms ease-in-out
 }
+
+@keyframes spinning {
+  100% {
+    transform: rotate(4680deg)
+  }
+}
+
+
+
 
 .rotate-45-deg {
   transform: rotate(10000deg)

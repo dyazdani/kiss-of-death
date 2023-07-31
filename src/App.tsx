@@ -8,7 +8,6 @@ import TurnArrows from "./components/TurnArrows.tsx"
 import kiss from "./assets/kiss.mp3"
 import ChooseAnimal from "./components/ChooseAnimal.tsx"
 import backgroundMusic from "./assets/background-music.mp3"
-import Bottle from "./components/Bottle.tsx"
 
 
 
@@ -89,6 +88,8 @@ function App() {
         playersReady={game.playersReady} 
         allPlayersObject={game.allPlayers}
         kissee={game.kissee}
+        playersLeft={game.playersLeft}
+        spinning={game.spinning}
       />
       <div className={`${game.playersReady.length === 4 ? "hidden" : ""} circle-wrapper`} >
         <ChooseAnimal 
@@ -129,9 +130,14 @@ function App() {
         type="button" 
         onClick={() => {
           Rune.actions.determineKissee();
+          Rune.actions.startSpinning();
           setTimeout(Rune.actions.killKissee, 3000);
           setTimeout(Rune.actions.checkForGameEnd, 3001);
-          setTimeout(Rune.actions.nextTurn, 3002);
+          if (game.playersLeft > 1) {
+            setTimeout(Rune.actions.nextTurn, 3002);
+          }
+
+
 
         }}
         ></button>

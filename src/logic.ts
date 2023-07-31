@@ -30,6 +30,7 @@ export interface GameState {
   animalsChosen: string[]
   hasGameStarted: boolean
   kissee: string
+  spinning: string
 }
 
 type GameActions = {
@@ -38,6 +39,8 @@ type GameActions = {
   killKissee: () => void
   checkForGameEnd: () => void
   assignAnimal: (chosenAnimal: string) => void
+  startSpinning: () => void
+  endSpinning: () => void
   // useBomb: (params: {game: GameState, playerId: string}) => void
   // dontUseBomb: (params: {game: GameState, playerId: string}) => void
 }
@@ -67,7 +70,8 @@ Rune.initLogic({
     kissee: "",
     hasGameStarted: false,
     playersLeft: 4,
-    animalsChosen: []
+    animalsChosen: [],
+    spinning: ""
   })},
   actions: {
     assignAnimal: (chosenAnimal, {game, playerId}) => {
@@ -124,6 +128,13 @@ Rune.initLogic({
           const slicedTurnOrder = game.turnOrder.slice(1);
           game.turnOrder = [...slicedTurnOrder, game.turnOrder[0]];
         }
+    },
+    startSpinning: (_, {game}) => {
+      game.spinning = "spinning";
+    },
+    endSpinning: (_, {game}) => {
+        game.spinning = ""
+
     },
   },
     // STRETCH GOAL

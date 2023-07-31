@@ -1,13 +1,17 @@
 import bottle from "./../assets/bottle-green.png"
 import { PlayersObject } from "../logic"
+import { useState } from "react"
 
 interface BottleProps {
     playersReady: object[]
     kissee: string
     allPlayersObject: PlayersObject
+    playersLeft: number
+    spinning: string
 }
-const Bottle = ({playersReady, kissee, allPlayersObject}: BottleProps) => {
+const Bottle = ({playersReady, kissee, allPlayersObject, playersLeft, spinning}: BottleProps) => {
     let newAngle = "0"
+
     
     if (kissee) {
         const angleOfKissee = 
@@ -17,13 +21,13 @@ const Bottle = ({playersReady, kissee, allPlayersObject}: BottleProps) => {
             : allPlayersObject[kissee].animal === "komodo-dragon" ? "315" 
             : "";
 
-        newAngle = angleOfKissee + 2 * 360 * 360;
+        newAngle = angleOfKissee + 2 * 360 + Math.random() * 360;
     }
 
     //TODO: assign an old and new kissee in game state to compare
     return (
         <div className={`${playersReady.length === 4 ? "" : "hidden"} bottle-wrapper`}>
-            <img className={`${playersReady.length === 4 ? "" : "hidden"} rotate-${newAngle}-deg ${kissee ? "bottle-spinning": ""} bottle`} src={bottle}/>
+            <img onAnimationEnd={() => {Rune.actions.endSpinning()}} alt={spinning} className={`${playersReady.length === 4 ? "" : "hidden"} rotate-${newAngle}-deg ${kissee ? "bottle-spinning": ""} ${playersLeft < 3 ? "bottle-spin-2" : ""} bottle`} src={bottle}/>
         </div>
     )
 }

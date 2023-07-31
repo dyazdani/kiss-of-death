@@ -10,10 +10,12 @@ interface PlayerCircleProps {
     allPlayersObject: PlayersObject
     playersReady: object[]
     kissee: string
+    spinning: string
+    playersLeft: number
 }
 
 //TODO: give Player a class that styles them with an X on top of them if isDead is true
-const PlayerCircle = ({allPlayersObject, playersReady, kissee}: PlayerCircleProps) => {
+const PlayerCircle = ({allPlayersObject, playersReady, kissee, playersLeft, spinning}: PlayerCircleProps) => {
 
     const getTargetPlayerId = (animalPlayerChose: string, playersReady: object[]) => {
         const indexWithTargetPlayerObject = playersReady.findIndex((obj: object) => Object.hasOwn(obj, animalPlayerChose));
@@ -54,6 +56,8 @@ const PlayerCircle = ({allPlayersObject, playersReady, kissee}: PlayerCircleProp
                 playersReady={playersReady}
                 kissee={kissee}
                 allPlayersObject={allPlayersObject}
+                playersLeft={playersLeft}
+                spinning={spinning}
             />
         </div>
 
