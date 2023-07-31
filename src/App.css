@@ -288,3 +288,17 @@ outline: solid black 1px;
   transform: rotate(315deg)
 
 }
+
+
+.waiting {
+  font-size: 3rem;
+  margin-top: 10px;
+  animation: hourglass 3s infinite linear(0, 1);
+
+}
+
+@keyframes hourglass {
+  100% {
+    transform: rotate(360deg)
+  }
+}
