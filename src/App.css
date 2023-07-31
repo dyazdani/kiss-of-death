@@ -257,8 +257,24 @@ outline: solid black 1px;
   height: 70px;
 }
 
+.point-45  {
+  transform: rotate(45deg);
+}
+
+.point-135  {
+  transform: rotate(135deg);
+}
+
+.point-225  {
+  transform: rotate(225deg);
+}
+
+.point-315  {
+  transform: rotate(315deg);
+}
+
 .bottle-spinning[alt='spinning'] {
-  animation: spinning 3000ms ease-in-out
+  animation: spinning 3000ms ease-out
 }
 
 @keyframes spinning {

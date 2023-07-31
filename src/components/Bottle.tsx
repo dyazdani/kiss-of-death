@@ -20,13 +20,13 @@ const Bottle = ({playersReady, kissee, allPlayersObject, playersLeft, spinning}:
             : allPlayersObject[kissee].animal === "komodo-dragon" ? "315" 
             : "";
 
-        newAngle = angleOfKissee + 2 * 360 + Math.random() * 360;
+        newAngle = angleOfKissee
     }
 
     //TODO: assign an old and new kissee in game state to compare
     return (
         <div className={`${playersReady.length === 4 ? "" : "hidden"} bottle-wrapper`}>
-            <img onAnimationEnd={() => {Rune.actions.endSpinning()}} alt={spinning} className={`${playersReady.length === 4 ? "" : "hidden"} rotate-${newAngle}-deg ${kissee ? "bottle-spinning": ""} ${playersLeft < 3 ? "bottle-spin-2" : ""} bottle`} src={bottle}/>
+            <img onAnimationEnd={() => {Rune.actions.endSpinning()}} alt={spinning} className={`point-${newAngle} ${playersReady.length === 4 ? "" : "hidden"} ${kissee ? "bottle-spinning": ""} ${playersLeft < 3 ? "bottle-spin-2" : ""} bottle`} src={bottle}/>
         </div>
     )
 }
